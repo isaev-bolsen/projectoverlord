@@ -86,7 +86,7 @@ namespace Hyperv.Misc
         private MOS GetWmiObjects(string classname, string where)
         {
             string query;
-            string ScopePath = string.Join(@"\", @"\", Environment.MachineName, "root", "virtualization");
+            string ScopePath = string.Join(@"\", @"\", Environment.MachineName, "root", "virtualization", "v2");
             ManagementScope scope = new ManagementScope(ScopePath);
 
             if (where != null)
@@ -124,8 +124,8 @@ namespace Hyperv.Misc
 
     class Constants
     {
-        internal const string DefineVirtualSystem = "DefineVirtualSystem";
-        internal const string ModifyVirtualSystem = "ModifyVirtualSystem";
+        internal const string DefineVirtualSystem = "DefineSystem";
+        internal const string ModifyVirtualSystem = "ModifySystem";
         internal const uint ERROR_SUCCESS = 0;
         internal const uint ERROR_INV_ARGUMENTS = 87;
     }
