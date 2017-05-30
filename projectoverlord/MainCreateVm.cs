@@ -3,7 +3,7 @@ using System.Linq;
 using System.Management;
 
 //Example from https://blogs.msdn.microsoft.com/sergeim/2008/06/03/prepare-vm-create-vm-programmatically-hyper-v-api-c-version/
-namespace Hyperv.Misc
+namespace projectoverlord.HyperVAdapter
 {
     public class VMService
     {

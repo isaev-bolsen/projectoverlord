@@ -1,4 +1,4 @@
-﻿using Hyperv.Misc;
+﻿using projectoverlord.HyperVAdapter;
 using System;
 
 namespace projectoverlord.Tester1
