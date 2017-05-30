@@ -1,40 +1,59 @@
 ﻿using System;
-using System.Globalization;
+using System.Linq;
 using System.Management;
 
 //Example from https://blogs.msdn.microsoft.com/sergeim/2008/06/03/prepare-vm-create-vm-programmatically-hyper-v-api-c-version/
 namespace Hyperv.Misc
 {
-    using MO = ManagementObject;
-    using MBO = ManagementBaseObject;
-    using MOS = ManagementObjectCollection;
-
-    public class MainCreateVm
+    public class VMService
     {
-        public void CreateVm(string displayName, string Host)
+        private const string DefineSystem = "DefineSystem";
+        private const string ModifySystem = "ModifySystem";
+        private const uint ERROR_SUCCESS = 0;
+        private const uint ERROR_INV_ARGUMENTS = 87;
+
+        private readonly ManagementScope VMManagementScope;
+        private readonly ManagementObject VMManagementService;
+
+        public Action<string, object[]> Log = Console.WriteLine;
+
+        public VMService(string host)
+        {
+            VMManagementScope = new ManagementScope(string.Join(@"\", @"\", Environment.MachineName, "root", "virtualization", "v2"));
+            VMManagementService = GetWmiObjects("Msvm_VirtualSystemManagementService").OfType<ManagementObject>().Single();
+        }
+
+        private ManagementObjectCollection GetWmiObjects(string classname)
+        {
+            return new ManagementObjectSearcher(VMManagementScope, new ObjectQuery("select * from " + classname)).Get();
+        }
+
+        private ManagementObjectCollection GetWmiObjects(string classname, string where)
+        {
+            return new ManagementObjectSearcher(VMManagementScope, new ObjectQuery(string.Format("select * from {0} where {1}", classname, where))).Get();
+        }
+
+        public void CreateVm(string displayName)
         {
             string notes = "Created " + DateTime.Now;
 
-            MO sysMan = GetMsVM_VirtualSystemManagementService();
-
-            // Create VM with empty settings
-            MBO definition = sysMan.InvokeMethod(
-                Constants.DefineVirtualSystem,
-                sysMan.GetMethodParameters(Constants.DefineVirtualSystem),  // empty set
-                                    null);
-
+            ManagementBaseObject definition = VMManagementService.InvokeMethod(
+                DefineSystem,
+                VMManagementService.GetMethodParameters(DefineSystem),
+                null
+                );
             uint retCode = (uint)definition["returnvalue"];
 
-            if (retCode != Constants.ERROR_SUCCESS) throw new InvalidOperationException("DefineVirtualSystem failed");
+            if (retCode != ERROR_SUCCESS) throw new InvalidOperationException(DefineSystem + " failed");
 
             // Obtain WMI root\virtualization:ComputerSystem object.
             // we will need "Name" of it, which is GUID
             string vmPath = definition["DefinedSystem"] as string;
-            MO computerSystemTemplate = new MO(vmPath);
+            ManagementObject computerSystemTemplate = new ManagementObject(vmPath);
             string vmName = (string)computerSystemTemplate["name"];
 
             // this is GUID; will need to locate settings for this VM
-            MO settings = GetMsvm_VirtualSystemSettingData(vmName);
+            ManagementObject settings = GetMsvm_VirtualSystemSettingData(vmName);
 
             // Now, set settings of this MSVM_ComputerSystem as we like
             settings["elementname"] = displayName;
@@ -47,87 +66,22 @@ namespace Hyperv.Misc
             //     http://msdn.microsoft.com/en-us/library/cc136944(VS.85).aspx
             settings.Put();
 
-
             // Now, set the settings which were build above to newly created ComputerSystem
-            MBO inParams = sysMan.GetMethodParameters(Constants.ModifyVirtualSystem);
+            ManagementBaseObject inParams = VMManagementService.GetMethodParameters(ModifySystem);
             string settingsText = settings.GetText(TextFormat.WmiDtd20);
             inParams["ComputerSystem"] = computerSystemTemplate;
             inParams["SystemSettingData"] = settingsText;
-            MBO resultToCheck = sysMan.InvokeMethod(Constants.ModifyVirtualSystem, inParams, null);
+            ManagementBaseObject resultToCheck = VMManagementService.InvokeMethod(ModifySystem, inParams, null);
             // Almost done – now apply the settings to newly created ComputerSystem
-            MO settingsAsSet = (MO)resultToCheck["ModifiedSettingData"];
+            ManagementObject settingsAsSet = (ManagementObject)resultToCheck["ModifiedSettingData"];
             // Optionally print settingsAsSet here
-            Log("Created: VM with name ‘{0}’ and GUID name ‘{1}'", displayName, vmName);
-        } // CreateVm
-
-        private MO GetMsVM_VirtualSystemManagementService()
-        {
-            return GetWmiObject("Msvm_VirtualSystemManagementService", null);
+            Log("Created: VM with name ‘{0}’ and GUID name ‘{1}'", new[] { displayName, vmName });
         }
 
-        private MO GetMsvm_VirtualSystemSettingData(string vmName)
+        private ManagementObject GetMsvm_VirtualSystemSettingData(string vmName)
         {
-            return GetWmiObject("Msvm_VirtualSystemSettingData", string.Format("systemname = '{0}'", vmName));
+            return GetWmiObjects("Msvm_VirtualSystemSettingData", string.Format("systemname = '{0}'", vmName)).OfType<ManagementObject>().Single();
         }
-
-        #region Wmi Helpers
-
-        private MO GetWmiObject(string classname, string where)
-        {
-            MOS resultset = GetWmiObjects(classname, where);
-            if (resultset.Count != 1) throw new InvalidOperationException(string.Format("Cannot locate {0} where {1}", classname, where));
-            MOS.ManagementObjectEnumerator en = resultset.GetEnumerator();
-            en.MoveNext();
-            MO result = en.Current as MO;
-            if (result == null) throw new InvalidOperationException("Failure retrieving " + classname + " where " + where);
-            return result;
-        }
-
-        private MOS GetWmiObjects(string classname, string where)
-        {
-            string query;
-            string ScopePath = string.Join(@"\", @"\", Environment.MachineName, "root", "virtualization", "v2");
-            ManagementScope scope = new ManagementScope(ScopePath);
-
-            if (where != null)
-            {
-                query = string.Format("select * from {0} where {1}", classname, where);
-            }
-            else
-            {
-                query = string.Format(CultureInfo.InvariantCulture, "select * from {0}", classname);
-            }
-
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, new ObjectQuery(query));
-            ManagementObjectCollection resultset = searcher.Get();
-
-            return resultset;
-        }
-
-        #endregion Wmi helpers
-
-        private static void Log(string message, params object[] data)
-        {
-            Console.WriteLine(message, data);
-        }
-
-        public static void Oops(object sender, UnhandledExceptionEventArgs e)
-        {
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Exception ex = e.ExceptionObject as Exception;
-            Log(ex.Message);
-            Console.ResetColor();
-            Log(ex.ToString());
-        }
-    } // class MainCreateVm
-
-    class Constants
-    {
-        internal const string DefineVirtualSystem = "DefineSystem";
-        internal const string ModifyVirtualSystem = "ModifySystem";
-        internal const uint ERROR_SUCCESS = 0;
-        internal const uint ERROR_INV_ARGUMENTS = 87;
     }
 }
 
