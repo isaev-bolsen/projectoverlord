@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace projectoverlord
+namespace projectoverlord.HyperVAdapter
 {
     public class Class1
     {
