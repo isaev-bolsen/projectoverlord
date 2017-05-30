@@ -8,7 +8,7 @@ namespace projectoverlord.Tester1
         static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(MainCreateVm.Oops);
-            new MainCreateVm().CreateVm(args);
+            new MainCreateVm().CreateVm(args.Length < 1 ? new[] { "EXAMPLE" } : args);
         }
     }
 }

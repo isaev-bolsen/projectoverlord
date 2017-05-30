@@ -77,7 +77,7 @@ namespace Hyperv.Misc
 
         private MO GetMsVM_VirtualSystemManagementService()
         {
-            return GetWmiObject("MsVM_VirtualSystemManagementService", null);
+            return GetWmiObject("Msvm_VirtualSystemManagementService", null);
         }
 
         private MO GetMsvm_VirtualSystemSettingData(string vmName)
@@ -110,7 +110,7 @@ namespace Hyperv.Misc
             }
             else
             {
-                query = string.Format(CultureInfo.InvariantCulture, "select * from { 0}", classname);
+                query = string.Format(CultureInfo.InvariantCulture, "select * from {0}", classname);
             }
 
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, new ObjectQuery(query));
