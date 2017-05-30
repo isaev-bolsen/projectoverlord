@@ -8,7 +8,7 @@ namespace projectoverlord.HyperVAdapter
     public class VMService
     {
         private const string DefineSystem = "DefineSystem";
-        private const string ModifySystem = "ModifySystem";
+        private const string ModifySystem = "ModifySystemSettings";
         private const uint ERROR_SUCCESS = 0;
         private const uint ERROR_INV_ARGUMENTS = 87;
 
@@ -30,34 +30,35 @@ namespace projectoverlord.HyperVAdapter
 
         private ManagementObjectCollection GetWmiObjects(string classname, string where)
         {
-            return new ManagementObjectSearcher(VMManagementScope, new ObjectQuery(string.Format("select * from {0} where {1}", classname, where))).Get();
+            string querry = string.Format("select * from {0} where {1}", classname, where);
+            return new ManagementObjectSearcher(VMManagementScope, new ObjectQuery(querry)).Get();
+        }
+
+        private void AssertSuccess(ManagementBaseObject operationResult)
+        {
+            if ((uint)operationResult["returnvalue"] != ERROR_SUCCESS) throw new InvalidOperationException(DefineSystem + " failed");
         }
 
         public void CreateVm(string displayName)
         {
-            string notes = "Created " + DateTime.Now;
-
             ManagementBaseObject definition = VMManagementService.InvokeMethod(
                 DefineSystem,
                 VMManagementService.GetMethodParameters(DefineSystem),
                 null
                 );
-            uint retCode = (uint)definition["returnvalue"];
-
-            if (retCode != ERROR_SUCCESS) throw new InvalidOperationException(DefineSystem + " failed");
+            AssertSuccess(definition);
 
             // Obtain WMI root\virtualization:ComputerSystem object.
             // we will need "Name" of it, which is GUID
-            string vmPath = definition["DefinedSystem"] as string;
+            string vmPath = definition["ResultingSystem"] as string;
             ManagementObject computerSystemTemplate = new ManagementObject(vmPath);
             string vmName = (string)computerSystemTemplate["name"];
 
-            // this is GUID; will need to locate settings for this VM
             ManagementObject settings = GetMsvm_VirtualSystemSettingData(vmName);
 
             // Now, set settings of this MSVM_ComputerSystem as we like
             settings["elementname"] = displayName;
-            settings["notes"] = notes;
+            settings["notes"] = new[] { "Created " + DateTime.Now };
             settings["BIOSGUID"] = new Guid();
             settings["BIOSSerialNumber"] = "1234567890";
             settings["BIOSNumLock"] = "true";
@@ -69,18 +70,34 @@ namespace projectoverlord.HyperVAdapter
             // Now, set the settings which were build above to newly created ComputerSystem
             ManagementBaseObject inParams = VMManagementService.GetMethodParameters(ModifySystem);
             string settingsText = settings.GetText(TextFormat.WmiDtd20);
-            inParams["ComputerSystem"] = computerSystemTemplate;
-            inParams["SystemSettingData"] = settingsText;
+            inParams["SystemSettings"] = computerSystemTemplate;
             ManagementBaseObject resultToCheck = VMManagementService.InvokeMethod(ModifySystem, inParams, null);
             // Almost done – now apply the settings to newly created ComputerSystem
-            ManagementObject settingsAsSet = (ManagementObject)resultToCheck["ModifiedSettingData"];
             // Optionally print settingsAsSet here
             Log("Created: VM with name ‘{0}’ and GUID name ‘{1}'", new[] { displayName, vmName });
         }
 
         private ManagementObject GetMsvm_VirtualSystemSettingData(string vmName)
         {
-            return GetWmiObjects("Msvm_VirtualSystemSettingData", string.Format("systemname = '{0}'", vmName)).OfType<ManagementObject>().Single();
+            ManagementObjectCollection res = GetWmiObjects("Msvm_VirtualSystemSettingData");
+
+            ManagementObject VMSettings = res.OfType<ManagementObject>().Last();
+
+            var props = VMSettings.Properties.OfType<PropertyData>().Where(pd => pd.Value != null);
+            var propsBYType = props.GroupBy(pd => pd.Type);
+            var StringProps = props.Where(pd => pd.Type == CimType.String);
+            var guidProps = props.Where(pd =>
+            {
+                Guid forOut;
+                return Guid.TryParse(pd.Value.ToString(), out forOut);
+            });
+
+            string[] ids = guidProps.Select(p => p.Name).ToArray();
+            return res.OfType<ManagementObject>().Single(s =>
+            {
+                var vals = ids.Select(K => s.Properties[K].Value).ToList();
+                return vals.Contains(vmName);
+            });
         }
     }
 }
