@@ -9,15 +9,9 @@ namespace Hyperv.Misc
     using MBO = ManagementBaseObject;
     using MOS = ManagementObjectCollection;
 
-    class MainCreateVm
+    public class MainCreateVm
     {
-        static void Main(string[] args)
-        {
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(Oops);
-            new MainCreateVm().CreateVm(args);
-        }
-
-        void CreateVm(string[] args)
+        public void CreateVm(params string[] args)
         {
             if (args.Length < 1)
             {
@@ -78,7 +72,7 @@ namespace Hyperv.Misc
             // Almost done – now apply the settings to newly created ComputerSystem
             MO settingsAsSet = (MO)resultToCheck["ModifiedSettingData"];
             // Optionally print settingsAsSet here
-            Log("Created: VM with name ‘{ 0}’ and GUID name ‘{ 1}'", displayName, vmName);
+            Log("Created: VM with name ‘{0}’ and GUID name ‘{1}'", displayName, vmName);
         } // CreateVm
 
         private MO GetMsVM_VirtualSystemManagementService()
@@ -96,7 +90,7 @@ namespace Hyperv.Misc
         private MO GetWmiObject(string classname, string where)
         {
             MOS resultset = GetWmiObjects(classname, where);
-            if (resultset.Count != 1) throw new InvalidOperationException(string.Format("Cannot locate { 0 } where { 1}", classname, where));
+            if (resultset.Count != 1) throw new InvalidOperationException(string.Format("Cannot locate {0} where {1}", classname, where));
             MOS.ManagementObjectEnumerator en = resultset.GetEnumerator();
             en.MoveNext();
             MO result = en.Current as MO;
@@ -112,7 +106,7 @@ namespace Hyperv.Misc
 
             if (where != null)
             {
-                query = string.Format("select * from { 0}                    where { 1}", classname, where);
+                query = string.Format("select * from {0} where {1}", classname, where);
             }
             else
             {
@@ -132,7 +126,7 @@ namespace Hyperv.Misc
             Console.WriteLine(message, data);
         }
 
-        private static void Oops(object sender, UnhandledExceptionEventArgs e)
+        public static void Oops(object sender, UnhandledExceptionEventArgs e)
         {
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
