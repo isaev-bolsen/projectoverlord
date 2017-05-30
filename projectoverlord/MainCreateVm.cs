@@ -11,24 +11,9 @@ namespace Hyperv.Misc
 
     public class MainCreateVm
     {
-        public void CreateVm(params string[] args)
+        public void CreateVm(string displayName, string Host)
         {
-            if (args.Length < 1)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Log("Usage: createvm<vmname>[< notes >]");
-                Console.ForegroundColor = ConsoleColor.White;
-                Log("Example: createvm vm1");
-                Console.ResetColor();
-                Environment.Exit((int)Constants.ERROR_INV_ARGUMENTS);
-            }
-
-            string displayName = args[0];
-
-            string notes;
-
-            if (args.Length > 1) notes = args[1];
-            else notes = "Created " + DateTime.Now;
+            string notes = "Created " + DateTime.Now;
 
             MO sysMan = GetMsVM_VirtualSystemManagementService();
 
@@ -101,8 +86,8 @@ namespace Hyperv.Misc
         private MOS GetWmiObjects(string classname, string where)
         {
             string query;
-
-            ManagementScope scope = new ManagementScope(@"root\virtualization", null);
+            string ScopePath = string.Join(@"\", @"\", Environment.MachineName, "root", "virtualization");
+            ManagementScope scope = new ManagementScope(ScopePath);
 
             if (where != null)
             {
