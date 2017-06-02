@@ -9,10 +9,10 @@ namespace projectoverlord.HyperVAdapter
     {
         private const string DefineSystemWMIMethod = "DefineSystem";
         private const string ModifySystemWMIMEthod = "ModifySystemSettings";
+        private const string VSSettingsData = "Msvm_VirtualSystemSettingData";
 
         private const uint ERROR_SUCCESS = 0;
         private const uint ERROR_INV_ARGUMENTS = 87;
-
         private readonly ManagementScope VMManagementScope;
         private readonly ManagementObject VMManagementService;
 
@@ -80,7 +80,7 @@ namespace projectoverlord.HyperVAdapter
 
         private ManagementObject GetMsvm_VirtualSystemSettingData(string vmName)
         {
-            ManagementObjectCollection res = GetWmiObjects("Msvm_VirtualSystemSettingData");
+            ManagementObjectCollection res = GetWmiObjects(VSSettingsData);
 
             ManagementObject VMSettings = res.OfType<ManagementObject>().Last();
 
