@@ -13,27 +13,17 @@ namespace projectoverlord.HyperVAdapter
 
         private const uint ERROR_SUCCESS = 0;
         private const uint ERROR_INV_ARGUMENTS = 87;
-        private readonly ManagementScope VMManagementScope;
+        private readonly WMIHelper WMIHelper;
         private readonly ManagementObject VMManagementService;
 
         public Action<string, object[]> Log = Console.WriteLine;
 
         public VMService(string host)
         {
-            VMManagementScope = new ManagementScope(string.Join(@"\", @"\", Environment.MachineName, "root", "virtualization", "v2"));
-            VMManagementService = GetWmiObjects("Msvm_VirtualSystemManagementService").OfType<ManagementObject>().Single();
+            WMIHelper = new WMIHelper(Environment.MachineName, "root", "virtualization", "v2");
+            VMManagementService = WMIHelper.GetByClassName("Msvm_VirtualSystemManagementService").OfType<ManagementObject>().Single();
         }
 
-        private ManagementObjectCollection GetWmiObjects(string classname)
-        {
-            return new ManagementObjectSearcher(VMManagementScope, new ObjectQuery("select * from " + classname)).Get();
-        }
-
-        private ManagementObjectCollection GetWmiObjects(string classname, string where)
-        {
-            string querry = string.Format("select * from {0} where {1}", classname, where);
-            return new ManagementObjectSearcher(VMManagementScope, new ObjectQuery(querry)).Get();
-        }
 
         private void AssertSuccess(ManagementBaseObject operationResult)
         {
@@ -80,7 +70,7 @@ namespace projectoverlord.HyperVAdapter
 
         private ManagementObject GetMsvm_VirtualSystemSettingData(string vmName)
         {
-            ManagementObjectCollection res = GetWmiObjects(VSSettingsData);
+            ManagementObjectCollection res = WMIHelper.GetByClassName(VSSettingsData);
 
             ManagementObject VMSettings = res.OfType<ManagementObject>().Last();
 
