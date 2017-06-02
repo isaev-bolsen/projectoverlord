@@ -8,7 +8,7 @@ namespace projectoverlord.Tester1
         static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(Oops);
-            new VMService(Environment.MachineName).CreateVm(args.Length < 1 ? "EXAMPLE" : args[0]);
+            new VirtualSystemManagementService(Environment.MachineName).CreateVm(args.Length < 1 ? "EXAMPLE" : args[0]);
         }
 
         public static void Oops(object sender, UnhandledExceptionEventArgs e)

@@ -5,7 +5,7 @@ using System.Management;
 //Example from https://blogs.msdn.microsoft.com/sergeim/2008/06/03/prepare-vm-create-vm-programmatically-hyper-v-api-c-version/
 namespace projectoverlord.HyperVAdapter
 {
-    public class VMService
+    public class VirtualSystemManagementService
     {
         public class DefineSystemResult
         {
@@ -34,7 +34,7 @@ namespace projectoverlord.HyperVAdapter
 
         public Action<string, object[]> Log = Console.WriteLine;
 
-        public VMService(string host)
+        public VirtualSystemManagementService(string host)
         {
             WMIHelper = new WMIHelper(Environment.MachineName, "root", "virtualization", "v2");
             VMManagementService = WMIHelper.GetByClassName("Msvm_VirtualSystemManagementService").OfType<ManagementObject>().Single();
