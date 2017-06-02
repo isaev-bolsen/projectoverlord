@@ -7,8 +7,9 @@ namespace projectoverlord.HyperVAdapter
 {
     public class VMService
     {
-        private const string DefineSystem = "DefineSystem";
-        private const string ModifySystem = "ModifySystemSettings";
+        private const string DefineSystemWMIMethod = "DefineSystem";
+        private const string ModifySystemWMIMEthod = "ModifySystemSettings";
+
         private const uint ERROR_SUCCESS = 0;
         private const uint ERROR_INV_ARGUMENTS = 87;
 
@@ -36,14 +37,14 @@ namespace projectoverlord.HyperVAdapter
 
         private void AssertSuccess(ManagementBaseObject operationResult)
         {
-            if ((uint)operationResult["returnvalue"] != ERROR_SUCCESS) throw new InvalidOperationException(DefineSystem + " failed");
+            if ((uint)operationResult["returnvalue"] != ERROR_SUCCESS) throw new InvalidOperationException(DefineSystemWMIMethod + " failed");
         }
 
         public void CreateVm(string displayName)
         {
             ManagementBaseObject definition = VMManagementService.InvokeMethod(
-                DefineSystem,
-                VMManagementService.GetMethodParameters(DefineSystem),
+                DefineSystemWMIMethod,
+                VMManagementService.GetMethodParameters(DefineSystemWMIMethod),
                 null
                 );
             AssertSuccess(definition);
@@ -68,10 +69,10 @@ namespace projectoverlord.HyperVAdapter
             settings.Put();
 
             // Now, set the settings which were build above to newly created ComputerSystem
-            ManagementBaseObject inParams = VMManagementService.GetMethodParameters(ModifySystem);
+            ManagementBaseObject inParams = VMManagementService.GetMethodParameters(ModifySystemWMIMEthod);
             string settingsText = settings.GetText(TextFormat.WmiDtd20);
             inParams["SystemSettings"] = computerSystemTemplate;
-            ManagementBaseObject resultToCheck = VMManagementService.InvokeMethod(ModifySystem, inParams, null);
+            ManagementBaseObject resultToCheck = VMManagementService.InvokeMethod(ModifySystemWMIMEthod, inParams, null);
             // Almost done – now apply the settings to newly created ComputerSystem
             // Optionally print settingsAsSet here
             Log("Created: VM with name ‘{0}’ and GUID name ‘{1}'", new[] { displayName, vmName });
