@@ -7,6 +7,22 @@ namespace projectoverlord.HyperVAdapter
 {
     public class VMService
     {
+        public class DefineSystemResult
+        {
+            public readonly string VMPath;
+
+            internal DefineSystemResult(ManagementBaseObject operationResult)
+            {
+                if ((uint)operationResult["ReturnValue"] != ERROR_SUCCESS) throw new InvalidOperationException(DefineSystemWMIMethod + " failed");
+                VMPath = operationResult["ResultingSystem"].ToString();
+            }
+
+            public ManagementObject GetResultingVM()
+            {
+                return new ManagementObject(VMPath);
+            }
+        }
+
         private const string DefineSystemWMIMethod = "DefineSystem";
         private const string ModifySystemWMIMEthod = "ModifySystemSettings";
         private const string VSSettingsData = "Msvm_VirtualSystemSettingData";
@@ -25,25 +41,14 @@ namespace projectoverlord.HyperVAdapter
         }
 
 
-        private void AssertSuccess(ManagementBaseObject operationResult)
-        {
-            if ((uint)operationResult["returnvalue"] != ERROR_SUCCESS) throw new InvalidOperationException(DefineSystemWMIMethod + " failed");
-        }
-
         public void CreateVm(string displayName)
         {
-            ManagementBaseObject definition = VMManagementService.InvokeMethod(
-                DefineSystemWMIMethod,
-                VMManagementService.GetMethodParameters(DefineSystemWMIMethod),
-                null
-                );
-            AssertSuccess(definition);
-
-            // Obtain WMI root\virtualization:ComputerSystem object.
-            // we will need "Name" of it, which is GUID
-            string vmPath = definition["ResultingSystem"] as string;
-            ManagementObject computerSystemTemplate = new ManagementObject(vmPath);
-            string vmName = (string)computerSystemTemplate["name"];
+            ManagementObject computerSystem = new DefineSystemResult(VMManagementService.InvokeMethod(
+                     DefineSystemWMIMethod,
+                     VMManagementService.GetMethodParameters(DefineSystemWMIMethod),
+                     null
+                     )).GetResultingVM();
+            string vmName = (string)computerSystem["name"];
 
             ManagementObject settings = GetMsvm_VirtualSystemSettingData(vmName);
 
@@ -61,7 +66,7 @@ namespace projectoverlord.HyperVAdapter
             // Now, set the settings which were build above to newly created ComputerSystem
             ManagementBaseObject inParams = VMManagementService.GetMethodParameters(ModifySystemWMIMEthod);
             string settingsText = settings.GetText(TextFormat.WmiDtd20);
-            inParams["SystemSettings"] = computerSystemTemplate;
+            inParams["SystemSettings"] = computerSystem;
             ManagementBaseObject resultToCheck = VMManagementService.InvokeMethod(ModifySystemWMIMEthod, inParams, null);
             // Almost done – now apply the settings to newly created ComputerSystem
             // Optionally print settingsAsSet here
