@@ -17,9 +17,9 @@ namespace projectoverlord.HyperVAdapter
                 VMPath = operationResult["ResultingSystem"].ToString();
             }
 
-            public ManagementObject GetResultingVM()
+            public Msvm_ComputerSystem GetResultingVM()
             {
-                return new ManagementObject(VMPath);
+                return new Msvm_ComputerSystem(VMPath);
             }
         }
 
@@ -43,14 +43,13 @@ namespace projectoverlord.HyperVAdapter
 
         public void CreateVm(string displayName)
         {
-            ManagementObject computerSystem = new DefineSystemResult(VMManagementService.InvokeMethod(
+            Msvm_ComputerSystem computerSystem = new DefineSystemResult(VMManagementService.InvokeMethod(
                      DefineSystemWMIMethod,
                      VMManagementService.GetMethodParameters(DefineSystemWMIMethod),
                      null
                      )).GetResultingVM();
-            string vmName = (string)computerSystem["name"];
 
-            ManagementObject settings = GetMsvm_VirtualSystemSettingData(vmName);
+            ManagementObject settings = GetMsvm_VirtualSystemSettingData(computerSystem.Name);
 
             // Now, set settings of this MSVM_ComputerSystem as we like
             settings["elementname"] = displayName;
@@ -70,7 +69,7 @@ namespace projectoverlord.HyperVAdapter
             ManagementBaseObject resultToCheck = VMManagementService.InvokeMethod(ModifySystemWMIMEthod, inParams, null);
             // Almost done – now apply the settings to newly created ComputerSystem
             // Optionally print settingsAsSet here
-            Log("Created: VM with name ‘{0}’ and GUID name ‘{1}'", new[] { displayName, vmName });
+            Log("Created: VM with name ‘{0}’ and GUID name ‘{1}'", new[] { displayName, computerSystem.Name });
         }
 
         private ManagementObject GetMsvm_VirtualSystemSettingData(string vmName)
