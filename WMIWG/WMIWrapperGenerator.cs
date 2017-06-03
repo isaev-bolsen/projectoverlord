@@ -55,7 +55,8 @@ namespace WMIWG
                     Name = prop.Name,
                     Type = new CodeTypeReference(CIMTypeToTy(prop.Type)),
                 };
-                Property.GetStatements.Add(new CodeCastExpression(Property.Type, new CodeIndexerExpression(instanceFieldReference, new CodePrimitiveExpression(prop.Name))));
+                Property.GetStatements.Add(new CodeMethodReturnStatement(
+                    new CodeCastExpression(Property.Type, new CodeIndexerExpression(instanceFieldReference, new CodePrimitiveExpression(prop.Name)))));
                 CodeTypeDeclaration.Members.Add(Property);
             }
             return CodeTypeDeclaration;
