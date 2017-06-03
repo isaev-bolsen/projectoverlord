@@ -19,7 +19,7 @@ namespace projectoverlord.HyperVAdapter
 
             public Msvm_ComputerSystem GetResultingVM()
             {
-                return new Msvm_ComputerSystem(VMPath);
+                return new Msvm_ComputerSystem(new ManagementObject(VMPath));
             }
         }
 
