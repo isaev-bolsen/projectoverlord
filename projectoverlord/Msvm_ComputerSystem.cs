@@ -6,6 +6,7 @@ using System.Text;
 using System;
 using System.Linq;
 using System.Management;
+using WMIWG;
 
 namespace projectoverlord.HyperVAdapter
 {
@@ -19,6 +20,7 @@ namespace projectoverlord.HyperVAdapter
 
         internal Msvm_ComputerSystem(ManagementObject instance)
         {
+            new WMIWrapperGenerator().Generate(instance, "projectoverlord.HyperVAdapter");
             _instance = instance;
         }
     }
