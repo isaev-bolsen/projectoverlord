@@ -1,23 +1,32 @@
 ﻿using System;
 using System.CodeDom;
+using System.CodeDom.Compiler;
 using System.IO;
 using System.Management;
+using Microsoft.CSharp;
 
 namespace WMIWG
 {
-    public class Generator
+    public class WMIWrapperGenerator
     {
         private const string instanceFieldName = "_instance";
         private const string instanceParameterName = "instance";
 
-        private void Generate(ManagementBaseObject WMIObject, string nameSpace)
+        public void Generate(ManagementBaseObject WMIObject, string nameSpace)
         {
             CodeCompileUnit CodeCompileUnit = new CodeCompileUnit();
             CodeNamespace CodeNamespace = new CodeNamespace(nameSpace);
             CodeNamespace.Imports.Add(new CodeNamespaceImport("System.Management"));
             CodeNamespace.Types.Add(GetGenerateClass(WMIObject));
             CodeCompileUnit.Namespaces.Add(CodeNamespace);
-            File.WriteAllText(WMIObject.ClassPath.ClassName + ".cs", CodeCompileUnit.ToString());
+
+            CSharpCodeProvider provider = new CSharpCodeProvider();
+
+            using (StreamWriter sw = new StreamWriter(string.Join(".", WMIObject.ClassPath.ClassName, provider.FileExtension), false))
+            {
+                provider.GenerateCodeFromCompileUnit(CodeCompileUnit, sw, new CodeGeneratorOptions());
+                sw.Close();
+            }
         }
 
         private CodeTypeDeclaration GetGenerateClass(ManagementBaseObject WMIObject)

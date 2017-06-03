@@ -46,5 +46,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WMIHelper.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WMIWG\WMIWG.csproj">
+      <Project>{e1b7eadd-02b2-4b43-9889-cb222c252b3a}</Project>
+      <Name>WMIWG</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
