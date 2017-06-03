@@ -19,9 +19,9 @@ namespace projectoverlord.HyperVAdapter {
             _instance = instance;
         }
         
-        public virtual ushort AvailableRequestedStates {
+        public virtual System.Nullable<ushort> AvailableRequestedStates {
             get {
-                return ((ushort)(_instance["AvailableRequestedStates"]));
+                return ((System.Nullable<ushort>)(_instance["AvailableRequestedStates"]));
             }
         }
         
@@ -31,9 +31,9 @@ namespace projectoverlord.HyperVAdapter {
             }
         }
         
-        public virtual ushort CommunicationStatus {
+        public virtual System.Nullable<ushort> CommunicationStatus {
             get {
-                return ((ushort)(_instance["CommunicationStatus"]));
+                return ((System.Nullable<ushort>)(_instance["CommunicationStatus"]));
             }
         }
         
@@ -43,9 +43,9 @@ namespace projectoverlord.HyperVAdapter {
             }
         }
         
-        public virtual ushort Dedicated {
+        public virtual System.Nullable<ushort> Dedicated {
             get {
-                return ((ushort)(_instance["Dedicated"]));
+                return ((System.Nullable<ushort>)(_instance["Dedicated"]));
             }
         }
         
@@ -55,9 +55,9 @@ namespace projectoverlord.HyperVAdapter {
             }
         }
         
-        public virtual ushort DetailedStatus {
+        public virtual System.Nullable<ushort> DetailedStatus {
             get {
-                return ((ushort)(_instance["DetailedStatus"]));
+                return ((System.Nullable<ushort>)(_instance["DetailedStatus"]));
             }
         }
         
@@ -67,33 +67,33 @@ namespace projectoverlord.HyperVAdapter {
             }
         }
         
-        public virtual ushort EnabledDefault {
+        public virtual System.Nullable<ushort> EnabledDefault {
             get {
-                return ((ushort)(_instance["EnabledDefault"]));
+                return ((System.Nullable<ushort>)(_instance["EnabledDefault"]));
             }
         }
         
-        public virtual ushort EnabledState {
+        public virtual System.Nullable<ushort> EnabledState {
             get {
-                return ((ushort)(_instance["EnabledState"]));
+                return ((System.Nullable<ushort>)(_instance["EnabledState"]));
             }
         }
         
-        public virtual ushort EnhancedSessionModeState {
+        public virtual System.Nullable<ushort> EnhancedSessionModeState {
             get {
-                return ((ushort)(_instance["EnhancedSessionModeState"]));
+                return ((System.Nullable<ushort>)(_instance["EnhancedSessionModeState"]));
             }
         }
         
-        public virtual ushort FailedOverReplicationType {
+        public virtual System.Nullable<ushort> FailedOverReplicationType {
             get {
-                return ((ushort)(_instance["FailedOverReplicationType"]));
+                return ((System.Nullable<ushort>)(_instance["FailedOverReplicationType"]));
             }
         }
         
-        public virtual ushort HealthState {
+        public virtual System.Nullable<ushort> HealthState {
             get {
-                return ((ushort)(_instance["HealthState"]));
+                return ((System.Nullable<ushort>)(_instance["HealthState"]));
             }
         }
         
@@ -103,9 +103,9 @@ namespace projectoverlord.HyperVAdapter {
             }
         }
         
-        public virtual System.DateTime InstallDate {
+        public virtual System.Nullable<System.DateTime> InstallDate {
             get {
-                return ((System.DateTime)(_instance["InstallDate"]));
+                return ((System.Nullable<System.DateTime>)(_instance["InstallDate"]));
             }
         }
         
@@ -115,27 +115,27 @@ namespace projectoverlord.HyperVAdapter {
             }
         }
         
-        public virtual System.DateTime LastApplicationConsistentReplicationTime {
+        public virtual System.Nullable<System.DateTime> LastApplicationConsistentReplicationTime {
             get {
-                return ((System.DateTime)(_instance["LastApplicationConsistentReplicationTime"]));
+                return ((System.Nullable<System.DateTime>)(_instance["LastApplicationConsistentReplicationTime"]));
             }
         }
         
-        public virtual System.DateTime LastReplicationTime {
+        public virtual System.Nullable<System.DateTime> LastReplicationTime {
             get {
-                return ((System.DateTime)(_instance["LastReplicationTime"]));
+                return ((System.Nullable<System.DateTime>)(_instance["LastReplicationTime"]));
             }
         }
         
-        public virtual ushort LastReplicationType {
+        public virtual System.Nullable<ushort> LastReplicationType {
             get {
-                return ((ushort)(_instance["LastReplicationType"]));
+                return ((System.Nullable<ushort>)(_instance["LastReplicationType"]));
             }
         }
         
-        public virtual System.DateTime LastSuccessfulBackupTime {
+        public virtual System.Nullable<System.DateTime> LastSuccessfulBackupTime {
             get {
-                return ((System.DateTime)(_instance["LastSuccessfulBackupTime"]));
+                return ((System.Nullable<System.DateTime>)(_instance["LastSuccessfulBackupTime"]));
             }
         }
         
@@ -151,27 +151,27 @@ namespace projectoverlord.HyperVAdapter {
             }
         }
         
-        public virtual ushort NumberOfNumaNodes {
+        public virtual System.Nullable<ushort> NumberOfNumaNodes {
             get {
-                return ((ushort)(_instance["NumberOfNumaNodes"]));
+                return ((System.Nullable<ushort>)(_instance["NumberOfNumaNodes"]));
             }
         }
         
-        public virtual ulong OnTimeInMilliseconds {
+        public virtual System.Nullable<ulong> OnTimeInMilliseconds {
             get {
-                return ((ulong)(_instance["OnTimeInMilliseconds"]));
+                return ((System.Nullable<ulong>)(_instance["OnTimeInMilliseconds"]));
             }
         }
         
-        public virtual ushort OperatingStatus {
+        public virtual System.Nullable<ushort> OperatingStatus {
             get {
-                return ((ushort)(_instance["OperatingStatus"]));
+                return ((System.Nullable<ushort>)(_instance["OperatingStatus"]));
             }
         }
         
-        public virtual ushort OperationalStatus {
+        public virtual System.Nullable<ushort> OperationalStatus {
             get {
-                return ((ushort)(_instance["OperationalStatus"]));
+                return ((System.Nullable<ushort>)(_instance["OperationalStatus"]));
             }
         }
         
@@ -193,9 +193,9 @@ namespace projectoverlord.HyperVAdapter {
             }
         }
         
-        public virtual ushort PowerManagementCapabilities {
+        public virtual System.Nullable<ushort> PowerManagementCapabilities {
             get {
-                return ((ushort)(_instance["PowerManagementCapabilities"]));
+                return ((System.Nullable<ushort>)(_instance["PowerManagementCapabilities"]));
             }
         }
         
@@ -211,45 +211,45 @@ namespace projectoverlord.HyperVAdapter {
             }
         }
         
-        public virtual ushort PrimaryStatus {
+        public virtual System.Nullable<ushort> PrimaryStatus {
             get {
-                return ((ushort)(_instance["PrimaryStatus"]));
+                return ((System.Nullable<ushort>)(_instance["PrimaryStatus"]));
             }
         }
         
-        public virtual uint ProcessID {
+        public virtual System.Nullable<uint> ProcessID {
             get {
-                return ((uint)(_instance["ProcessID"]));
+                return ((System.Nullable<uint>)(_instance["ProcessID"]));
             }
         }
         
-        public virtual ushort ReplicationHealth {
+        public virtual System.Nullable<ushort> ReplicationHealth {
             get {
-                return ((ushort)(_instance["ReplicationHealth"]));
+                return ((System.Nullable<ushort>)(_instance["ReplicationHealth"]));
             }
         }
         
-        public virtual ushort ReplicationMode {
+        public virtual System.Nullable<ushort> ReplicationMode {
             get {
-                return ((ushort)(_instance["ReplicationMode"]));
+                return ((System.Nullable<ushort>)(_instance["ReplicationMode"]));
             }
         }
         
-        public virtual ushort ReplicationState {
+        public virtual System.Nullable<ushort> ReplicationState {
             get {
-                return ((ushort)(_instance["ReplicationState"]));
+                return ((System.Nullable<ushort>)(_instance["ReplicationState"]));
             }
         }
         
-        public virtual ushort RequestedState {
+        public virtual System.Nullable<ushort> RequestedState {
             get {
-                return ((ushort)(_instance["RequestedState"]));
+                return ((System.Nullable<ushort>)(_instance["RequestedState"]));
             }
         }
         
-        public virtual ushort ResetCapability {
+        public virtual System.Nullable<ushort> ResetCapability {
             get {
-                return ((ushort)(_instance["ResetCapability"]));
+                return ((System.Nullable<ushort>)(_instance["ResetCapability"]));
             }
         }
         
@@ -271,21 +271,21 @@ namespace projectoverlord.HyperVAdapter {
             }
         }
         
-        public virtual System.DateTime TimeOfLastConfigurationChange {
+        public virtual System.Nullable<System.DateTime> TimeOfLastConfigurationChange {
             get {
-                return ((System.DateTime)(_instance["TimeOfLastConfigurationChange"]));
+                return ((System.Nullable<System.DateTime>)(_instance["TimeOfLastConfigurationChange"]));
             }
         }
         
-        public virtual System.DateTime TimeOfLastStateChange {
+        public virtual System.Nullable<System.DateTime> TimeOfLastStateChange {
             get {
-                return ((System.DateTime)(_instance["TimeOfLastStateChange"]));
+                return ((System.Nullable<System.DateTime>)(_instance["TimeOfLastStateChange"]));
             }
         }
         
-        public virtual ushort TransitioningToState {
+        public virtual System.Nullable<ushort> TransitioningToState {
             get {
-                return ((ushort)(_instance["TransitioningToState"]));
+                return ((System.Nullable<ushort>)(_instance["TransitioningToState"]));
             }
         }
     }
