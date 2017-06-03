@@ -14,12 +14,12 @@ namespace WMIWG
 
         public void Generate(ManagementBaseObject WMIObject, string nameSpace)
         {
-            CodeCompileUnit CodeCompileUnit = new CodeCompileUnit();
             CodeNamespace CodeNamespace = new CodeNamespace(nameSpace);
             CodeNamespace.Imports.Add(new CodeNamespaceImport("System.Management"));
             CodeNamespace.Types.Add(GetGenerateClass(WMIObject));
-            CodeCompileUnit.Namespaces.Add(CodeNamespace);
 
+            CodeCompileUnit CodeCompileUnit = new CodeCompileUnit();
+            CodeCompileUnit.Namespaces.Add(CodeNamespace);
             CSharpCodeProvider provider = new CSharpCodeProvider();
 
             using (StreamWriter sw = new StreamWriter(string.Join(".", WMIObject.ClassPath.ClassName, provider.FileExtension), false))
