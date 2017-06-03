@@ -15,7 +15,6 @@ namespace WMIWG
         public void Generate(ManagementBaseObject WMIObject, string nameSpace)
         {
             CodeNamespace CodeNamespace = new CodeNamespace(nameSpace);
-            CodeNamespace.Imports.Add(new CodeNamespaceImport("System.Management"));
             CodeNamespace.Types.Add(GetGenerateClass(WMIObject));
 
             CodeCompileUnit CodeCompileUnit = new CodeCompileUnit();
@@ -42,7 +41,7 @@ namespace WMIWG
                 Attributes = MemberAttributes.Private
             });//private readonly ManagementObject _instance;
 
-            CodeConstructor CodeConstructor = new CodeConstructor();
+            CodeConstructor CodeConstructor = new CodeConstructor() {Attributes= MemberAttributes.Public };
             CodeConstructor.Parameters.Add(new CodeParameterDeclarationExpression(ObjectType, instanceParameterName));
             CodeConstructor.Statements.Add(new CodeAssignStatement(instanceFieldReference, new CodeVariableReferenceExpression(instanceParameterName)));
 
@@ -53,7 +52,8 @@ namespace WMIWG
                 CodeMemberProperty Property = new CodeMemberProperty()
                 {
                     Name = prop.Name,
-                    Type = new CodeTypeReference(CIMTypeToTy(prop.Type)),
+                    Attributes = MemberAttributes.Public,
+                    Type = new CodeTypeReference(CIMTypeToTy(prop.Type))
                 };
                 Property.GetStatements.Add(new CodeMethodReturnStatement(
                     new CodeCastExpression(Property.Type, new CodeIndexerExpression(instanceFieldReference, new CodePrimitiveExpression(prop.Name)))));
