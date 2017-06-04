@@ -7,15 +7,22 @@ using Microsoft.CSharp;
 
 namespace WMIWG
 {
+    /// <summary>
+    /// Utility class. Allows to generate class to wrap WMI objects
+    /// </summary>
     public class WMIWrapperGenerator
     {
         private const string instanceFieldName = "_instance";
         private const string instanceParameterName = "instance";
-
+        
+        /// <summary>
+        /// Generates wrapper class for object
+        /// </summary>
+        /// <param name="WMIObject"></param>
         public void Generate(ManagementBaseObject WMIObject)
         {
             CodeNamespace CodeNamespace = new CodeNamespace("WMIWrappers.Raw");
-            CodeNamespace.Types.Add(GetGenerateClass(WMIObject));
+            CodeNamespace.Types.Add(GetClass(WMIObject));
 
             CodeCompileUnit CodeCompileUnit = new CodeCompileUnit();
             CodeCompileUnit.Namespaces.Add(CodeNamespace);
@@ -28,7 +35,7 @@ namespace WMIWG
             }
         }
 
-        private CodeTypeDeclaration GetGenerateClass(ManagementBaseObject WMIObject)
+        private CodeTypeDeclaration GetClass(ManagementBaseObject WMIObject)
         {
             string name = WMIObject.ClassPath.ClassName;
             Type ObjectType = WMIObject.GetType();
@@ -51,25 +58,27 @@ namespace WMIWG
 
             CodeTypeDeclaration.Members.Add(AccessProp);
 
-            CodeConstructor CodeConstructor = new CodeConstructor() {Attributes= MemberAttributes.Public };
+            CodeConstructor CodeConstructor = new CodeConstructor() { Attributes = MemberAttributes.Public };
             CodeConstructor.Parameters.Add(new CodeParameterDeclarationExpression(ObjectType, instanceParameterName));
             CodeConstructor.Statements.Add(new CodeAssignStatement(instanceFieldReference, new CodeVariableReferenceExpression(instanceParameterName)));
 
             CodeTypeDeclaration.Members.Add(CodeConstructor);
 
-            foreach (var prop in WMIObject.Properties)
-            {
-                CodeMemberProperty Property = new CodeMemberProperty()
-                {
-                    Name = prop.Name,
-                    Attributes = MemberAttributes.Public,
-                    Type = new CodeTypeReference(CIMTypeToTy(prop.Type))
-                };
-                Property.GetStatements.Add(new CodeMethodReturnStatement(
-                    new CodeCastExpression(Property.Type, new CodeIndexerExpression(instanceFieldReference, new CodePrimitiveExpression(prop.Name)))));
-                CodeTypeDeclaration.Members.Add(Property);
-            }
+            foreach (var prop in WMIObject.Properties) CodeTypeDeclaration.Members.Add(GetProperty(instanceFieldReference, prop));
             return CodeTypeDeclaration;
+        }
+
+        private CodeMemberProperty GetProperty(CodeFieldReferenceExpression instanceFieldReference, PropertyData prop)
+        {
+            CodeMemberProperty Property = new CodeMemberProperty()
+            {
+                Name = prop.Name,
+                Attributes = MemberAttributes.Public,
+                Type = new CodeTypeReference(CIMTypeToTy(prop.Type))
+            };
+            Property.GetStatements.Add(new CodeMethodReturnStatement(
+                new CodeCastExpression(Property.Type, new CodeIndexerExpression(instanceFieldReference, new CodePrimitiveExpression(prop.Name)))));
+            return Property;
         }
 
         private Type CIMTypeToTy(CimType cim)
