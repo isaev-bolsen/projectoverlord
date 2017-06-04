@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Management;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Management;
 
 namespace WMIWrappers.Extended
 {
@@ -21,6 +16,11 @@ namespace WMIWrappers.Extended
             ManagementBaseObject pms = Instance.GetMethodParameters(RequestStateChange);
             pms["RequestedState"] = state;
             Instance.InvokeMethod(RequestStateChange, pms, null);
+        }
+
+        public void Put()
+        {
+            Instance.Put();
         }
 
         public void TurnOn()
