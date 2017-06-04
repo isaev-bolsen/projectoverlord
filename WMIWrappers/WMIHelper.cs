@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Management;
 
-namespace projectoverlord.HyperVAdapter
+namespace WMIWrappers
 {
-    internal class WMIHelper
+    public class WMIHelper
     {
         private const string _slash = @"\";
         private readonly ManagementScope _managementScope;

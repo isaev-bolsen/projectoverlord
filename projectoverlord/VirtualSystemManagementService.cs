@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Management;
+using WMIWrappers;
 using WMIWrappers.Extended;
 
 namespace projectoverlord.HyperVAdapter

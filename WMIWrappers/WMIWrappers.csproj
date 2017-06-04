@@ -44,6 +44,7 @@
     <Compile Include="Extended\Msvm_ComputerSystem.cs" />
     <Compile Include="Raw\Msvm_ComputerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WMIHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
