@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Management;
 
 namespace projectoverlord.HyperVAdapter
@@ -11,7 +10,7 @@ namespace projectoverlord.HyperVAdapter
 
         public WMIHelper(string Host, params string[] pathSegments)
         {
-            _managementScope = new ManagementScope(string.Join(_slash, new[] { _slash, Environment.MachineName }.Union(pathSegments)));
+            _managementScope = new ManagementScope(string.Join(_slash, new[] { _slash, Host }.Union(pathSegments)));
         }
 
         public ManagementObjectCollection GetByClassName(string classname)
