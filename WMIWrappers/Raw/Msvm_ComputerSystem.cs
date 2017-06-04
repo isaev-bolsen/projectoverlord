@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace projectoverlord.HyperVAdapter {
+namespace WMIWrappers.Raw {
     
     
     public class Msvm_ComputerSystem {
@@ -17,6 +17,12 @@ namespace projectoverlord.HyperVAdapter {
         
         public Msvm_ComputerSystem(System.Management.ManagementObject instance) {
             _instance = instance;
+        }
+        
+        protected virtual System.Management.ManagementObject Instance {
+            get {
+                return _instance;
+            }
         }
         
         public virtual System.Nullable<ushort> AvailableRequestedStates {

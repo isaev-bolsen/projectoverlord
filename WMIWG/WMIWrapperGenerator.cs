@@ -12,9 +12,9 @@ namespace WMIWG
         private const string instanceFieldName = "_instance";
         private const string instanceParameterName = "instance";
 
-        public void Generate(ManagementBaseObject WMIObject, string nameSpace)
+        public void Generate(ManagementBaseObject WMIObject)
         {
-            CodeNamespace CodeNamespace = new CodeNamespace(nameSpace);
+            CodeNamespace CodeNamespace = new CodeNamespace("WMIWrappers.Raw");
             CodeNamespace.Types.Add(GetGenerateClass(WMIObject));
 
             CodeCompileUnit CodeCompileUnit = new CodeCompileUnit();
