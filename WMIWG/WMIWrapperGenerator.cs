@@ -76,8 +76,10 @@ namespace WMIWG
                 Attributes = MemberAttributes.Public,
                 Type = new CodeTypeReference(CIMTypeToTy(prop.Type))
             };
-            Property.GetStatements.Add(new CodeMethodReturnStatement(
-                new CodeCastExpression(Property.Type, new CodeIndexerExpression(instanceFieldReference, new CodePrimitiveExpression(prop.Name)))));
+
+            CodeIndexerExpression CodeIndexerExpression = new CodeIndexerExpression(instanceFieldReference, new CodePrimitiveExpression(prop.Name));
+            Property.GetStatements.Add(new CodeMethodReturnStatement(new CodeCastExpression(Property.Type, CodeIndexerExpression)));
+            Property.SetStatements.Add(new CodeAssignStatement(CodeIndexerExpression, new CodeVariableReferenceExpression("value")));
             return Property;
         }
 
