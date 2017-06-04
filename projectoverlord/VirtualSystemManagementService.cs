@@ -3,7 +3,6 @@ using System.Linq;
 using System.Management;
 using WMIWrappers.Extended;
 
-//Example from https://blogs.msdn.microsoft.com/sergeim/2008/06/03/prepare-vm-create-vm-programmatically-hyper-v-api-c-version/
 namespace projectoverlord.HyperVAdapter
 {
     public class VirtualSystemManagementService
@@ -41,7 +40,6 @@ namespace projectoverlord.HyperVAdapter
             VMManagementService = WMIHelper.GetByClassName("Msvm_VirtualSystemManagementService").OfType<ManagementObject>().Single();
         }
 
-
         public void CreateVm(string displayName)
         {
             Msvm_ComputerSystem computerSystem = new DefineSystemResult(VMManagementService.InvokeMethod(
@@ -50,6 +48,14 @@ namespace projectoverlord.HyperVAdapter
                      null
                      )).GetResultingVM();
 
+            //computerSystem.ElementName = displayName; //does not work this way
+            //computerSystem.Put();
+            computerSystem.TurnOn();
+        }
+
+        private void TrashFromExample(string displayName, Msvm_ComputerSystem computerSystem)
+        {
+            //Example from https://blogs.msdn.microsoft.com/sergeim/2008/06/03/prepare-vm-create-vm-programmatically-hyper-v-api-c-version/
             ManagementObject settings = GetMsvm_VirtualSystemSettingData(computerSystem.Name);
 
             // Now, set settings of this MSVM_ComputerSystem as we like
