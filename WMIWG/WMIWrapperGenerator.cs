@@ -41,6 +41,16 @@ namespace WMIWG
                 Attributes = MemberAttributes.Private
             });//private readonly ManagementObject _instance;
 
+            CodeMemberProperty AccessProp = new CodeMemberProperty()
+            {
+                Type = new CodeTypeReference(ObjectType),
+                Name = "Instance",
+                Attributes = MemberAttributes.Family
+            };
+            AccessProp.GetStatements.Add(new CodeMethodReturnStatement(instanceFieldReference));
+
+            CodeTypeDeclaration.Members.Add(AccessProp);
+
             CodeConstructor CodeConstructor = new CodeConstructor() {Attributes= MemberAttributes.Public };
             CodeConstructor.Parameters.Add(new CodeParameterDeclarationExpression(ObjectType, instanceParameterName));
             CodeConstructor.Statements.Add(new CodeAssignStatement(instanceFieldReference, new CodeVariableReferenceExpression(instanceParameterName)));
