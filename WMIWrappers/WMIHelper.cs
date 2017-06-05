@@ -8,9 +8,13 @@ namespace WMIWrappers
         private const string _slash = @"\";
         private readonly ManagementScope _managementScope;
 
-        public WMIHelper(string Host, params string[] pathSegments)
+        public WMIHelper(ManagementPath path)
         {
-            _managementScope = new ManagementScope(string.Join(_slash, new[] { _slash, Host }.Union(pathSegments)));
+            _managementScope = new ManagementScope(path);
+        }
+
+        public WMIHelper(string Host, params string[] pathSegments) : this(new ManagementPath(string.Join(_slash, new[] { _slash, Host }.Union(pathSegments))))
+        {
         }
 
         public ManagementObjectCollection GetByClassName(string classname)
