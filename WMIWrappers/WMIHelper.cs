@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Management;
+using WMIWG;
 
 namespace WMIWrappers
 {
@@ -19,7 +20,11 @@ namespace WMIWrappers
 
         public ManagementObjectCollection GetByClassName(string classname)
         {
-            return new ManagementObjectSearcher(_managementScope, new ObjectQuery("select * from " + classname)).Get();
+            ManagementObjectCollection res = new ManagementObjectSearcher(_managementScope, new ObjectQuery("select * from " + classname)).Get();
+#if DEBUG
+            if (res.Count > 0) new WMIWrapperGenerator().Generate(res.OfType<ManagementBaseObject>().Last());
+#endif
+            return res;
         }
     }
 }
