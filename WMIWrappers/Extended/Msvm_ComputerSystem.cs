@@ -7,7 +7,6 @@ namespace WMIWrappers.Extended
     {
         private const string VSSettingsData = "Msvm_VirtualSystemSettingData";
         private const string RequestStateChange = "RequestStateChange";
-        private readonly Msvm_VirtualSystemSettingData Msvm_VirtualSystemSettingData;
 
         public Msvm_ComputerSystem(ManagementObject instance) : base(instance) { }
 
