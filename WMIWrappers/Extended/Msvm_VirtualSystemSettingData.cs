@@ -8,6 +8,11 @@ namespace WMIWrappers.Extended
         {
         }
 
+        public string ToWmiDtd20String()
+        {
+            return Instance.GetText(TextFormat.WmiDtd20);
+        }
+
         public void Put()
         {
             Instance.Put();
