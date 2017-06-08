@@ -11,422 +11,414 @@
 namespace WMIWrappers.Raw {
     
     
-    public class Msvm_ComputerSystem {
+    public class Msvm_ComputerSystem : WMIWrapper {
         
-        private System.Management.ManagementObject _instance;
-        
-        public Msvm_ComputerSystem(System.Management.ManagementObject instance) {
-            _instance = instance;
-        }
-        
-        protected virtual System.Management.ManagementObject Instance {
-            get {
-                return _instance;
-            }
+        public Msvm_ComputerSystem(System.Management.ManagementObject instance) : 
+                base(instance) {
         }
         
         public virtual System.Nullable<ushort> AvailableRequestedStates {
             get {
-                return ((System.Nullable<ushort>)(_instance["AvailableRequestedStates"]));
+                return ((System.Nullable<ushort>)(Instance["AvailableRequestedStates"]));
             }
             set {
-                _instance["AvailableRequestedStates"] = value;
+                Instance["AvailableRequestedStates"] = value;
             }
         }
         
         public virtual string Caption {
             get {
-                return ((string)(_instance["Caption"]));
+                return ((string)(Instance["Caption"]));
             }
             set {
-                _instance["Caption"] = value;
+                Instance["Caption"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> CommunicationStatus {
             get {
-                return ((System.Nullable<ushort>)(_instance["CommunicationStatus"]));
+                return ((System.Nullable<ushort>)(Instance["CommunicationStatus"]));
             }
             set {
-                _instance["CommunicationStatus"] = value;
+                Instance["CommunicationStatus"] = value;
             }
         }
         
         public virtual string CreationClassName {
             get {
-                return ((string)(_instance["CreationClassName"]));
+                return ((string)(Instance["CreationClassName"]));
             }
             set {
-                _instance["CreationClassName"] = value;
+                Instance["CreationClassName"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> Dedicated {
             get {
-                return ((System.Nullable<ushort>)(_instance["Dedicated"]));
+                return ((System.Nullable<ushort>)(Instance["Dedicated"]));
             }
             set {
-                _instance["Dedicated"] = value;
+                Instance["Dedicated"] = value;
             }
         }
         
         public virtual string Description {
             get {
-                return ((string)(_instance["Description"]));
+                return ((string)(Instance["Description"]));
             }
             set {
-                _instance["Description"] = value;
+                Instance["Description"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> DetailedStatus {
             get {
-                return ((System.Nullable<ushort>)(_instance["DetailedStatus"]));
+                return ((System.Nullable<ushort>)(Instance["DetailedStatus"]));
             }
             set {
-                _instance["DetailedStatus"] = value;
+                Instance["DetailedStatus"] = value;
             }
         }
         
         public virtual string ElementName {
             get {
-                return ((string)(_instance["ElementName"]));
+                return ((string)(Instance["ElementName"]));
             }
             set {
-                _instance["ElementName"] = value;
+                Instance["ElementName"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> EnabledDefault {
             get {
-                return ((System.Nullable<ushort>)(_instance["EnabledDefault"]));
+                return ((System.Nullable<ushort>)(Instance["EnabledDefault"]));
             }
             set {
-                _instance["EnabledDefault"] = value;
+                Instance["EnabledDefault"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> EnabledState {
             get {
-                return ((System.Nullable<ushort>)(_instance["EnabledState"]));
+                return ((System.Nullable<ushort>)(Instance["EnabledState"]));
             }
             set {
-                _instance["EnabledState"] = value;
+                Instance["EnabledState"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> EnhancedSessionModeState {
             get {
-                return ((System.Nullable<ushort>)(_instance["EnhancedSessionModeState"]));
+                return ((System.Nullable<ushort>)(Instance["EnhancedSessionModeState"]));
             }
             set {
-                _instance["EnhancedSessionModeState"] = value;
+                Instance["EnhancedSessionModeState"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> FailedOverReplicationType {
             get {
-                return ((System.Nullable<ushort>)(_instance["FailedOverReplicationType"]));
+                return ((System.Nullable<ushort>)(Instance["FailedOverReplicationType"]));
             }
             set {
-                _instance["FailedOverReplicationType"] = value;
+                Instance["FailedOverReplicationType"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> HealthState {
             get {
-                return ((System.Nullable<ushort>)(_instance["HealthState"]));
+                return ((System.Nullable<ushort>)(Instance["HealthState"]));
             }
             set {
-                _instance["HealthState"] = value;
+                Instance["HealthState"] = value;
             }
         }
         
         public virtual string IdentifyingDescriptions {
             get {
-                return ((string)(_instance["IdentifyingDescriptions"]));
+                return ((string)(Instance["IdentifyingDescriptions"]));
             }
             set {
-                _instance["IdentifyingDescriptions"] = value;
+                Instance["IdentifyingDescriptions"] = value;
             }
         }
         
         public virtual System.Nullable<System.DateTime> InstallDate {
             get {
-                return ((System.Nullable<System.DateTime>)(_instance["InstallDate"]));
+                return ((System.Nullable<System.DateTime>)(Instance["InstallDate"]));
             }
             set {
-                _instance["InstallDate"] = value;
+                Instance["InstallDate"] = value;
             }
         }
         
         public virtual string InstanceID {
             get {
-                return ((string)(_instance["InstanceID"]));
+                return ((string)(Instance["InstanceID"]));
             }
             set {
-                _instance["InstanceID"] = value;
+                Instance["InstanceID"] = value;
             }
         }
         
         public virtual System.Nullable<System.DateTime> LastApplicationConsistentReplicationTime {
             get {
-                return ((System.Nullable<System.DateTime>)(_instance["LastApplicationConsistentReplicationTime"]));
+                return ((System.Nullable<System.DateTime>)(Instance["LastApplicationConsistentReplicationTime"]));
             }
             set {
-                _instance["LastApplicationConsistentReplicationTime"] = value;
+                Instance["LastApplicationConsistentReplicationTime"] = value;
             }
         }
         
         public virtual System.Nullable<System.DateTime> LastReplicationTime {
             get {
-                return ((System.Nullable<System.DateTime>)(_instance["LastReplicationTime"]));
+                return ((System.Nullable<System.DateTime>)(Instance["LastReplicationTime"]));
             }
             set {
-                _instance["LastReplicationTime"] = value;
+                Instance["LastReplicationTime"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> LastReplicationType {
             get {
-                return ((System.Nullable<ushort>)(_instance["LastReplicationType"]));
+                return ((System.Nullable<ushort>)(Instance["LastReplicationType"]));
             }
             set {
-                _instance["LastReplicationType"] = value;
+                Instance["LastReplicationType"] = value;
             }
         }
         
         public virtual System.Nullable<System.DateTime> LastSuccessfulBackupTime {
             get {
-                return ((System.Nullable<System.DateTime>)(_instance["LastSuccessfulBackupTime"]));
+                return ((System.Nullable<System.DateTime>)(Instance["LastSuccessfulBackupTime"]));
             }
             set {
-                _instance["LastSuccessfulBackupTime"] = value;
+                Instance["LastSuccessfulBackupTime"] = value;
             }
         }
         
         public virtual string Name {
             get {
-                return ((string)(_instance["Name"]));
+                return ((string)(Instance["Name"]));
             }
             set {
-                _instance["Name"] = value;
+                Instance["Name"] = value;
             }
         }
         
         public virtual string NameFormat {
             get {
-                return ((string)(_instance["NameFormat"]));
+                return ((string)(Instance["NameFormat"]));
             }
             set {
-                _instance["NameFormat"] = value;
+                Instance["NameFormat"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> NumberOfNumaNodes {
             get {
-                return ((System.Nullable<ushort>)(_instance["NumberOfNumaNodes"]));
+                return ((System.Nullable<ushort>)(Instance["NumberOfNumaNodes"]));
             }
             set {
-                _instance["NumberOfNumaNodes"] = value;
+                Instance["NumberOfNumaNodes"] = value;
             }
         }
         
         public virtual System.Nullable<ulong> OnTimeInMilliseconds {
             get {
-                return ((System.Nullable<ulong>)(_instance["OnTimeInMilliseconds"]));
+                return ((System.Nullable<ulong>)(Instance["OnTimeInMilliseconds"]));
             }
             set {
-                _instance["OnTimeInMilliseconds"] = value;
+                Instance["OnTimeInMilliseconds"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> OperatingStatus {
             get {
-                return ((System.Nullable<ushort>)(_instance["OperatingStatus"]));
+                return ((System.Nullable<ushort>)(Instance["OperatingStatus"]));
             }
             set {
-                _instance["OperatingStatus"] = value;
+                Instance["OperatingStatus"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> OperationalStatus {
             get {
-                return ((System.Nullable<ushort>)(_instance["OperationalStatus"]));
+                return ((System.Nullable<ushort>)(Instance["OperationalStatus"]));
             }
             set {
-                _instance["OperationalStatus"] = value;
+                Instance["OperationalStatus"] = value;
             }
         }
         
         public virtual string OtherDedicatedDescriptions {
             get {
-                return ((string)(_instance["OtherDedicatedDescriptions"]));
+                return ((string)(Instance["OtherDedicatedDescriptions"]));
             }
             set {
-                _instance["OtherDedicatedDescriptions"] = value;
+                Instance["OtherDedicatedDescriptions"] = value;
             }
         }
         
         public virtual string OtherEnabledState {
             get {
-                return ((string)(_instance["OtherEnabledState"]));
+                return ((string)(Instance["OtherEnabledState"]));
             }
             set {
-                _instance["OtherEnabledState"] = value;
+                Instance["OtherEnabledState"] = value;
             }
         }
         
         public virtual string OtherIdentifyingInfo {
             get {
-                return ((string)(_instance["OtherIdentifyingInfo"]));
+                return ((string)(Instance["OtherIdentifyingInfo"]));
             }
             set {
-                _instance["OtherIdentifyingInfo"] = value;
+                Instance["OtherIdentifyingInfo"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> PowerManagementCapabilities {
             get {
-                return ((System.Nullable<ushort>)(_instance["PowerManagementCapabilities"]));
+                return ((System.Nullable<ushort>)(Instance["PowerManagementCapabilities"]));
             }
             set {
-                _instance["PowerManagementCapabilities"] = value;
+                Instance["PowerManagementCapabilities"] = value;
             }
         }
         
         public virtual string PrimaryOwnerContact {
             get {
-                return ((string)(_instance["PrimaryOwnerContact"]));
+                return ((string)(Instance["PrimaryOwnerContact"]));
             }
             set {
-                _instance["PrimaryOwnerContact"] = value;
+                Instance["PrimaryOwnerContact"] = value;
             }
         }
         
         public virtual string PrimaryOwnerName {
             get {
-                return ((string)(_instance["PrimaryOwnerName"]));
+                return ((string)(Instance["PrimaryOwnerName"]));
             }
             set {
-                _instance["PrimaryOwnerName"] = value;
+                Instance["PrimaryOwnerName"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> PrimaryStatus {
             get {
-                return ((System.Nullable<ushort>)(_instance["PrimaryStatus"]));
+                return ((System.Nullable<ushort>)(Instance["PrimaryStatus"]));
             }
             set {
-                _instance["PrimaryStatus"] = value;
+                Instance["PrimaryStatus"] = value;
             }
         }
         
         public virtual System.Nullable<uint> ProcessID {
             get {
-                return ((System.Nullable<uint>)(_instance["ProcessID"]));
+                return ((System.Nullable<uint>)(Instance["ProcessID"]));
             }
             set {
-                _instance["ProcessID"] = value;
+                Instance["ProcessID"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> ReplicationHealth {
             get {
-                return ((System.Nullable<ushort>)(_instance["ReplicationHealth"]));
+                return ((System.Nullable<ushort>)(Instance["ReplicationHealth"]));
             }
             set {
-                _instance["ReplicationHealth"] = value;
+                Instance["ReplicationHealth"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> ReplicationMode {
             get {
-                return ((System.Nullable<ushort>)(_instance["ReplicationMode"]));
+                return ((System.Nullable<ushort>)(Instance["ReplicationMode"]));
             }
             set {
-                _instance["ReplicationMode"] = value;
+                Instance["ReplicationMode"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> ReplicationState {
             get {
-                return ((System.Nullable<ushort>)(_instance["ReplicationState"]));
+                return ((System.Nullable<ushort>)(Instance["ReplicationState"]));
             }
             set {
-                _instance["ReplicationState"] = value;
+                Instance["ReplicationState"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> RequestedState {
             get {
-                return ((System.Nullable<ushort>)(_instance["RequestedState"]));
+                return ((System.Nullable<ushort>)(Instance["RequestedState"]));
             }
             set {
-                _instance["RequestedState"] = value;
+                Instance["RequestedState"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> ResetCapability {
             get {
-                return ((System.Nullable<ushort>)(_instance["ResetCapability"]));
+                return ((System.Nullable<ushort>)(Instance["ResetCapability"]));
             }
             set {
-                _instance["ResetCapability"] = value;
+                Instance["ResetCapability"] = value;
             }
         }
         
         public virtual string Roles {
             get {
-                return ((string)(_instance["Roles"]));
+                return ((string)(Instance["Roles"]));
             }
             set {
-                _instance["Roles"] = value;
+                Instance["Roles"] = value;
             }
         }
         
         public virtual string Status {
             get {
-                return ((string)(_instance["Status"]));
+                return ((string)(Instance["Status"]));
             }
             set {
-                _instance["Status"] = value;
+                Instance["Status"] = value;
             }
         }
         
         public virtual string StatusDescriptions {
             get {
-                return ((string)(_instance["StatusDescriptions"]));
+                return ((string)(Instance["StatusDescriptions"]));
             }
             set {
-                _instance["StatusDescriptions"] = value;
+                Instance["StatusDescriptions"] = value;
             }
         }
         
         public virtual System.Nullable<System.DateTime> TimeOfLastConfigurationChange {
             get {
-                return ((System.Nullable<System.DateTime>)(_instance["TimeOfLastConfigurationChange"]));
+                return ((System.Nullable<System.DateTime>)(Instance["TimeOfLastConfigurationChange"]));
             }
             set {
-                _instance["TimeOfLastConfigurationChange"] = value;
+                Instance["TimeOfLastConfigurationChange"] = value;
             }
         }
         
         public virtual System.Nullable<System.DateTime> TimeOfLastStateChange {
             get {
-                return ((System.Nullable<System.DateTime>)(_instance["TimeOfLastStateChange"]));
+                return ((System.Nullable<System.DateTime>)(Instance["TimeOfLastStateChange"]));
             }
             set {
-                _instance["TimeOfLastStateChange"] = value;
+                Instance["TimeOfLastStateChange"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> TransitioningToState {
             get {
-                return ((System.Nullable<ushort>)(_instance["TransitioningToState"]));
+                return ((System.Nullable<ushort>)(Instance["TransitioningToState"]));
             }
             set {
-                _instance["TransitioningToState"] = value;
+                Instance["TransitioningToState"] = value;
             }
         }
     }

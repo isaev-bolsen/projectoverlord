@@ -11,494 +11,486 @@
 namespace WMIWrappers.Raw {
     
     
-    public class Msvm_VirtualSystemSettingData {
+    public class Msvm_VirtualSystemSettingData : WMIWrapper {
         
-        private System.Management.ManagementObject _instance;
-        
-        public Msvm_VirtualSystemSettingData(System.Management.ManagementObject instance) {
-            _instance = instance;
-        }
-        
-        protected virtual System.Management.ManagementObject Instance {
-            get {
-                return _instance;
-            }
+        public Msvm_VirtualSystemSettingData(System.Management.ManagementObject instance) : 
+                base(instance) {
         }
         
         public virtual string AdditionalRecoveryInformation {
             get {
-                return ((string)(_instance["AdditionalRecoveryInformation"]));
+                return ((string)(Instance["AdditionalRecoveryInformation"]));
             }
             set {
-                _instance["AdditionalRecoveryInformation"] = value;
+                Instance["AdditionalRecoveryInformation"] = value;
             }
         }
         
         public virtual System.Nullable<bool> AllowFullSCSICommandSet {
             get {
-                return ((System.Nullable<bool>)(_instance["AllowFullSCSICommandSet"]));
+                return ((System.Nullable<bool>)(Instance["AllowFullSCSICommandSet"]));
             }
             set {
-                _instance["AllowFullSCSICommandSet"] = value;
+                Instance["AllowFullSCSICommandSet"] = value;
             }
         }
         
         public virtual System.Nullable<bool> AllowReducedFcRedundancy {
             get {
-                return ((System.Nullable<bool>)(_instance["AllowReducedFcRedundancy"]));
+                return ((System.Nullable<bool>)(Instance["AllowReducedFcRedundancy"]));
             }
             set {
-                _instance["AllowReducedFcRedundancy"] = value;
+                Instance["AllowReducedFcRedundancy"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> AutomaticCriticalErrorAction {
             get {
-                return ((System.Nullable<ushort>)(_instance["AutomaticCriticalErrorAction"]));
+                return ((System.Nullable<ushort>)(Instance["AutomaticCriticalErrorAction"]));
             }
             set {
-                _instance["AutomaticCriticalErrorAction"] = value;
+                Instance["AutomaticCriticalErrorAction"] = value;
             }
         }
         
         public virtual System.Nullable<System.DateTime> AutomaticCriticalErrorActionTimeout {
             get {
-                return ((System.Nullable<System.DateTime>)(_instance["AutomaticCriticalErrorActionTimeout"]));
+                return ((System.Nullable<System.DateTime>)(Instance["AutomaticCriticalErrorActionTimeout"]));
             }
             set {
-                _instance["AutomaticCriticalErrorActionTimeout"] = value;
+                Instance["AutomaticCriticalErrorActionTimeout"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> AutomaticRecoveryAction {
             get {
-                return ((System.Nullable<ushort>)(_instance["AutomaticRecoveryAction"]));
+                return ((System.Nullable<ushort>)(Instance["AutomaticRecoveryAction"]));
             }
             set {
-                _instance["AutomaticRecoveryAction"] = value;
+                Instance["AutomaticRecoveryAction"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> AutomaticShutdownAction {
             get {
-                return ((System.Nullable<ushort>)(_instance["AutomaticShutdownAction"]));
+                return ((System.Nullable<ushort>)(Instance["AutomaticShutdownAction"]));
             }
             set {
-                _instance["AutomaticShutdownAction"] = value;
+                Instance["AutomaticShutdownAction"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> AutomaticStartupAction {
             get {
-                return ((System.Nullable<ushort>)(_instance["AutomaticStartupAction"]));
+                return ((System.Nullable<ushort>)(Instance["AutomaticStartupAction"]));
             }
             set {
-                _instance["AutomaticStartupAction"] = value;
+                Instance["AutomaticStartupAction"] = value;
             }
         }
         
         public virtual System.Nullable<System.DateTime> AutomaticStartupActionDelay {
             get {
-                return ((System.Nullable<System.DateTime>)(_instance["AutomaticStartupActionDelay"]));
+                return ((System.Nullable<System.DateTime>)(Instance["AutomaticStartupActionDelay"]));
             }
             set {
-                _instance["AutomaticStartupActionDelay"] = value;
+                Instance["AutomaticStartupActionDelay"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> AutomaticStartupActionSequenceNumber {
             get {
-                return ((System.Nullable<ushort>)(_instance["AutomaticStartupActionSequenceNumber"]));
+                return ((System.Nullable<ushort>)(Instance["AutomaticStartupActionSequenceNumber"]));
             }
             set {
-                _instance["AutomaticStartupActionSequenceNumber"] = value;
+                Instance["AutomaticStartupActionSequenceNumber"] = value;
             }
         }
         
         public virtual string BaseBoardSerialNumber {
             get {
-                return ((string)(_instance["BaseBoardSerialNumber"]));
+                return ((string)(Instance["BaseBoardSerialNumber"]));
             }
             set {
-                _instance["BaseBoardSerialNumber"] = value;
+                Instance["BaseBoardSerialNumber"] = value;
             }
         }
         
         public virtual string BIOSGUID {
             get {
-                return ((string)(_instance["BIOSGUID"]));
+                return ((string)(Instance["BIOSGUID"]));
             }
             set {
-                _instance["BIOSGUID"] = value;
+                Instance["BIOSGUID"] = value;
             }
         }
         
         public virtual System.Nullable<bool> BIOSNumLock {
             get {
-                return ((System.Nullable<bool>)(_instance["BIOSNumLock"]));
+                return ((System.Nullable<bool>)(Instance["BIOSNumLock"]));
             }
             set {
-                _instance["BIOSNumLock"] = value;
+                Instance["BIOSNumLock"] = value;
             }
         }
         
         public virtual string BIOSSerialNumber {
             get {
-                return ((string)(_instance["BIOSSerialNumber"]));
+                return ((string)(Instance["BIOSSerialNumber"]));
             }
             set {
-                _instance["BIOSSerialNumber"] = value;
+                Instance["BIOSSerialNumber"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> BootOrder {
             get {
-                return ((System.Nullable<ushort>)(_instance["BootOrder"]));
+                return ((System.Nullable<ushort>)(Instance["BootOrder"]));
             }
             set {
-                _instance["BootOrder"] = value;
+                Instance["BootOrder"] = value;
             }
         }
         
         public virtual string BootSourceOrder {
             get {
-                return ((string)(_instance["BootSourceOrder"]));
+                return ((string)(Instance["BootSourceOrder"]));
             }
             set {
-                _instance["BootSourceOrder"] = value;
+                Instance["BootSourceOrder"] = value;
             }
         }
         
         public virtual string Caption {
             get {
-                return ((string)(_instance["Caption"]));
+                return ((string)(Instance["Caption"]));
             }
             set {
-                _instance["Caption"] = value;
+                Instance["Caption"] = value;
             }
         }
         
         public virtual string ChassisAssetTag {
             get {
-                return ((string)(_instance["ChassisAssetTag"]));
+                return ((string)(Instance["ChassisAssetTag"]));
             }
             set {
-                _instance["ChassisAssetTag"] = value;
+                Instance["ChassisAssetTag"] = value;
             }
         }
         
         public virtual string ChassisSerialNumber {
             get {
-                return ((string)(_instance["ChassisSerialNumber"]));
+                return ((string)(Instance["ChassisSerialNumber"]));
             }
             set {
-                _instance["ChassisSerialNumber"] = value;
+                Instance["ChassisSerialNumber"] = value;
             }
         }
         
         public virtual string ConfigurationDataRoot {
             get {
-                return ((string)(_instance["ConfigurationDataRoot"]));
+                return ((string)(Instance["ConfigurationDataRoot"]));
             }
             set {
-                _instance["ConfigurationDataRoot"] = value;
+                Instance["ConfigurationDataRoot"] = value;
             }
         }
         
         public virtual string ConfigurationFile {
             get {
-                return ((string)(_instance["ConfigurationFile"]));
+                return ((string)(Instance["ConfigurationFile"]));
             }
             set {
-                _instance["ConfigurationFile"] = value;
+                Instance["ConfigurationFile"] = value;
             }
         }
         
         public virtual string ConfigurationID {
             get {
-                return ((string)(_instance["ConfigurationID"]));
+                return ((string)(Instance["ConfigurationID"]));
             }
             set {
-                _instance["ConfigurationID"] = value;
+                Instance["ConfigurationID"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> ConsoleMode {
             get {
-                return ((System.Nullable<ushort>)(_instance["ConsoleMode"]));
+                return ((System.Nullable<ushort>)(Instance["ConsoleMode"]));
             }
             set {
-                _instance["ConsoleMode"] = value;
+                Instance["ConsoleMode"] = value;
             }
         }
         
         public virtual System.Nullable<System.DateTime> CreationTime {
             get {
-                return ((System.Nullable<System.DateTime>)(_instance["CreationTime"]));
+                return ((System.Nullable<System.DateTime>)(Instance["CreationTime"]));
             }
             set {
-                _instance["CreationTime"] = value;
+                Instance["CreationTime"] = value;
             }
         }
         
         public virtual System.Nullable<uint> DebugChannelId {
             get {
-                return ((System.Nullable<uint>)(_instance["DebugChannelId"]));
+                return ((System.Nullable<uint>)(Instance["DebugChannelId"]));
             }
             set {
-                _instance["DebugChannelId"] = value;
+                Instance["DebugChannelId"] = value;
             }
         }
         
         public virtual System.Nullable<uint> DebugPort {
             get {
-                return ((System.Nullable<uint>)(_instance["DebugPort"]));
+                return ((System.Nullable<uint>)(Instance["DebugPort"]));
             }
             set {
-                _instance["DebugPort"] = value;
+                Instance["DebugPort"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> DebugPortEnabled {
             get {
-                return ((System.Nullable<ushort>)(_instance["DebugPortEnabled"]));
+                return ((System.Nullable<ushort>)(Instance["DebugPortEnabled"]));
             }
             set {
-                _instance["DebugPortEnabled"] = value;
+                Instance["DebugPortEnabled"] = value;
             }
         }
         
         public virtual string Description {
             get {
-                return ((string)(_instance["Description"]));
+                return ((string)(Instance["Description"]));
             }
             set {
-                _instance["Description"] = value;
+                Instance["Description"] = value;
             }
         }
         
         public virtual string ElementName {
             get {
-                return ((string)(_instance["ElementName"]));
+                return ((string)(Instance["ElementName"]));
             }
             set {
-                _instance["ElementName"] = value;
+                Instance["ElementName"] = value;
             }
         }
         
         public virtual System.Nullable<bool> GuestControlledCacheTypes {
             get {
-                return ((System.Nullable<bool>)(_instance["GuestControlledCacheTypes"]));
+                return ((System.Nullable<bool>)(Instance["GuestControlledCacheTypes"]));
             }
             set {
-                _instance["GuestControlledCacheTypes"] = value;
+                Instance["GuestControlledCacheTypes"] = value;
             }
         }
         
         public virtual System.Nullable<ulong> HighMmioGapSize {
             get {
-                return ((System.Nullable<ulong>)(_instance["HighMmioGapSize"]));
+                return ((System.Nullable<ulong>)(Instance["HighMmioGapSize"]));
             }
             set {
-                _instance["HighMmioGapSize"] = value;
+                Instance["HighMmioGapSize"] = value;
             }
         }
         
         public virtual System.Nullable<bool> IncrementalBackupEnabled {
             get {
-                return ((System.Nullable<bool>)(_instance["IncrementalBackupEnabled"]));
+                return ((System.Nullable<bool>)(Instance["IncrementalBackupEnabled"]));
             }
             set {
-                _instance["IncrementalBackupEnabled"] = value;
+                Instance["IncrementalBackupEnabled"] = value;
             }
         }
         
         public virtual string InstanceID {
             get {
-                return ((string)(_instance["InstanceID"]));
+                return ((string)(Instance["InstanceID"]));
             }
             set {
-                _instance["InstanceID"] = value;
+                Instance["InstanceID"] = value;
             }
         }
         
         public virtual System.Nullable<bool> IsSaved {
             get {
-                return ((System.Nullable<bool>)(_instance["IsSaved"]));
+                return ((System.Nullable<bool>)(Instance["IsSaved"]));
             }
             set {
-                _instance["IsSaved"] = value;
+                Instance["IsSaved"] = value;
             }
         }
         
         public virtual System.Nullable<bool> LockOnDisconnect {
             get {
-                return ((System.Nullable<bool>)(_instance["LockOnDisconnect"]));
+                return ((System.Nullable<bool>)(Instance["LockOnDisconnect"]));
             }
             set {
-                _instance["LockOnDisconnect"] = value;
+                Instance["LockOnDisconnect"] = value;
             }
         }
         
         public virtual string LogDataRoot {
             get {
-                return ((string)(_instance["LogDataRoot"]));
+                return ((string)(Instance["LogDataRoot"]));
             }
             set {
-                _instance["LogDataRoot"] = value;
+                Instance["LogDataRoot"] = value;
             }
         }
         
         public virtual System.Nullable<ulong> LowMmioGapSize {
             get {
-                return ((System.Nullable<ulong>)(_instance["LowMmioGapSize"]));
+                return ((System.Nullable<ulong>)(Instance["LowMmioGapSize"]));
             }
             set {
-                _instance["LowMmioGapSize"] = value;
+                Instance["LowMmioGapSize"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> NetworkBootPreferredProtocol {
             get {
-                return ((System.Nullable<ushort>)(_instance["NetworkBootPreferredProtocol"]));
+                return ((System.Nullable<ushort>)(Instance["NetworkBootPreferredProtocol"]));
             }
             set {
-                _instance["NetworkBootPreferredProtocol"] = value;
+                Instance["NetworkBootPreferredProtocol"] = value;
             }
         }
         
         public virtual string Notes {
             get {
-                return ((string)(_instance["Notes"]));
+                return ((string)(Instance["Notes"]));
             }
             set {
-                _instance["Notes"] = value;
+                Instance["Notes"] = value;
             }
         }
         
         public virtual string Parent {
             get {
-                return ((string)(_instance["Parent"]));
+                return ((string)(Instance["Parent"]));
             }
             set {
-                _instance["Parent"] = value;
+                Instance["Parent"] = value;
             }
         }
         
         public virtual System.Nullable<bool> PauseAfterBootFailure {
             get {
-                return ((System.Nullable<bool>)(_instance["PauseAfterBootFailure"]));
+                return ((System.Nullable<bool>)(Instance["PauseAfterBootFailure"]));
             }
             set {
-                _instance["PauseAfterBootFailure"] = value;
+                Instance["PauseAfterBootFailure"] = value;
             }
         }
         
         public virtual string RecoveryFile {
             get {
-                return ((string)(_instance["RecoveryFile"]));
+                return ((string)(Instance["RecoveryFile"]));
             }
             set {
-                _instance["RecoveryFile"] = value;
+                Instance["RecoveryFile"] = value;
             }
         }
         
         public virtual System.Nullable<bool> SecureBootEnabled {
             get {
-                return ((System.Nullable<bool>)(_instance["SecureBootEnabled"]));
+                return ((System.Nullable<bool>)(Instance["SecureBootEnabled"]));
             }
             set {
-                _instance["SecureBootEnabled"] = value;
+                Instance["SecureBootEnabled"] = value;
             }
         }
         
         public virtual string SecureBootTemplateId {
             get {
-                return ((string)(_instance["SecureBootTemplateId"]));
+                return ((string)(Instance["SecureBootTemplateId"]));
             }
             set {
-                _instance["SecureBootTemplateId"] = value;
+                Instance["SecureBootTemplateId"] = value;
             }
         }
         
         public virtual string SnapshotDataRoot {
             get {
-                return ((string)(_instance["SnapshotDataRoot"]));
+                return ((string)(Instance["SnapshotDataRoot"]));
             }
             set {
-                _instance["SnapshotDataRoot"] = value;
+                Instance["SnapshotDataRoot"] = value;
             }
         }
         
         public virtual string SuspendDataRoot {
             get {
-                return ((string)(_instance["SuspendDataRoot"]));
+                return ((string)(Instance["SuspendDataRoot"]));
             }
             set {
-                _instance["SuspendDataRoot"] = value;
+                Instance["SuspendDataRoot"] = value;
             }
         }
         
         public virtual string SwapFileDataRoot {
             get {
-                return ((string)(_instance["SwapFileDataRoot"]));
+                return ((string)(Instance["SwapFileDataRoot"]));
             }
             set {
-                _instance["SwapFileDataRoot"] = value;
+                Instance["SwapFileDataRoot"] = value;
             }
         }
         
         public virtual System.Nullable<ushort> UserSnapshotType {
             get {
-                return ((System.Nullable<ushort>)(_instance["UserSnapshotType"]));
+                return ((System.Nullable<ushort>)(Instance["UserSnapshotType"]));
             }
             set {
-                _instance["UserSnapshotType"] = value;
+                Instance["UserSnapshotType"] = value;
             }
         }
         
         public virtual string Version {
             get {
-                return ((string)(_instance["Version"]));
+                return ((string)(Instance["Version"]));
             }
             set {
-                _instance["Version"] = value;
+                Instance["Version"] = value;
             }
         }
         
         public virtual System.Nullable<bool> VirtualNumaEnabled {
             get {
-                return ((System.Nullable<bool>)(_instance["VirtualNumaEnabled"]));
+                return ((System.Nullable<bool>)(Instance["VirtualNumaEnabled"]));
             }
             set {
-                _instance["VirtualNumaEnabled"] = value;
+                Instance["VirtualNumaEnabled"] = value;
             }
         }
         
         public virtual string VirtualSystemIdentifier {
             get {
-                return ((string)(_instance["VirtualSystemIdentifier"]));
+                return ((string)(Instance["VirtualSystemIdentifier"]));
             }
             set {
-                _instance["VirtualSystemIdentifier"] = value;
+                Instance["VirtualSystemIdentifier"] = value;
             }
         }
         
         public virtual string VirtualSystemSubType {
             get {
-                return ((string)(_instance["VirtualSystemSubType"]));
+                return ((string)(Instance["VirtualSystemSubType"]));
             }
             set {
-                _instance["VirtualSystemSubType"] = value;
+                Instance["VirtualSystemSubType"] = value;
             }
         }
         
         public virtual string VirtualSystemType {
             get {
-                return ((string)(_instance["VirtualSystemType"]));
+                return ((string)(Instance["VirtualSystemType"]));
             }
             set {
-                _instance["VirtualSystemType"] = value;
+                Instance["VirtualSystemType"] = value;
             }
         }
     }
