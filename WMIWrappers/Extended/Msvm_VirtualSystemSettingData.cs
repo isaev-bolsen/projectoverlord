@@ -12,10 +12,5 @@ namespace WMIWrappers.Extended
         {
             return Instance.GetText(TextFormat.WmiDtd20);
         }
-
-        public void Put()
-        {
-            Instance.Put();
-        }
     }
 }
