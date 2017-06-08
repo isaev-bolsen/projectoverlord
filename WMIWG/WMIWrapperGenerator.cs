@@ -12,7 +12,7 @@ namespace WMIWG
     /// </summary>
     public class WMIWrapperGenerator
     {
-        private const string instanceFieldName = "_instance";
+        private const string instanceFieldName = "Instance";
         private const string instanceParameterName = "instance";
         
         /// <summary>
@@ -43,24 +43,11 @@ namespace WMIWG
             CodeFieldReferenceExpression instanceFieldReference = new CodeFieldReferenceExpression(null, instanceFieldName);
 
             CodeTypeDeclaration CodeTypeDeclaration = new CodeTypeDeclaration(name);
-            CodeTypeDeclaration.Members.Add(new CodeMemberField(ObjectType, instanceFieldName)
-            {
-                Attributes = MemberAttributes.Private
-            });//private readonly ManagementObject _instance;
-
-            CodeMemberProperty AccessProp = new CodeMemberProperty()
-            {
-                Type = new CodeTypeReference(ObjectType),
-                Name = "Instance",
-                Attributes = MemberAttributes.Family
-            };
-            AccessProp.GetStatements.Add(new CodeMethodReturnStatement(instanceFieldReference));
-
-            CodeTypeDeclaration.Members.Add(AccessProp);
+            CodeTypeDeclaration.BaseTypes.Add(new CodeTypeReference("WMIWrapper"));
 
             CodeConstructor CodeConstructor = new CodeConstructor() { Attributes = MemberAttributes.Public };
             CodeConstructor.Parameters.Add(new CodeParameterDeclarationExpression(ObjectType, instanceParameterName));
-            CodeConstructor.Statements.Add(new CodeAssignStatement(instanceFieldReference, new CodeVariableReferenceExpression(instanceParameterName)));
+            CodeConstructor.BaseConstructorArgs.Add(new CodeVariableReferenceExpression(instanceParameterName));
 
             CodeTypeDeclaration.Members.Add(CodeConstructor);
 
