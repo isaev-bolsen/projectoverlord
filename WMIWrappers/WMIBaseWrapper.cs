@@ -13,6 +13,9 @@ namespace WMIWrappers
         protected WMIWrapper(ManagementObject instance)
         {
             _instance = instance;
+#if DEBUG
+            CheckProps();
+#endif
         }
 
         public virtual void Refresh()
@@ -23,9 +26,15 @@ namespace WMIWrappers
         protected virtual DateTime? ParseDate(object propValue)
         {
             if (propValue == null) return null;
-            if (propValue.GetType() == typeof(DateTime)) return (DateTime)propValue;
+            if (propValue.GetType() == typeof(DateTime))
+                return (DateTime)propValue;
+            else
+                return ManagementDateTimeConverter.ToDateTime(propValue.ToString());
+        }
 
-            return DateTime.Parse(propValue.ToString());
+        private void CheckProps()
+        {
+            foreach (var prop in GetType().GetProperties()) prop.GetValue(this);
         }
     }
 }
