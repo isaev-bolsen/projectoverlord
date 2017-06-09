@@ -1,4 +1,5 @@
-﻿using System.Management;
+﻿using System;
+using System.Management;
 
 namespace WMIWrappers
 {
@@ -17,6 +18,14 @@ namespace WMIWrappers
         public virtual void Refresh()
         {
             _instance = new ManagementObject(Instance.Path);
+        }
+
+        protected virtual DateTime? ParseDate(object propValue)
+        {
+            if (propValue == null) return null;
+            if (propValue.GetType() == typeof(DateTime)) return (DateTime)propValue;
+
+            return DateTime.Parse(propValue.ToString());
         }
     }
 }
