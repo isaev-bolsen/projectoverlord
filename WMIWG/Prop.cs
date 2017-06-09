@@ -11,12 +11,15 @@ namespace WMIWG
         private CimType _type;
         private string _name;
         private CodeTypeReference _typeReference;
+        private CodeIndexerExpression _indexerExpression;
 
         public Prop(PropertyData prop)
         {
-            _type = prop.Type; 
+            _type = prop.Type;
             _name = prop.Name;
-            _typeReference = new CodeTypeReference(CIMTypeToTy(prop.Type));
+
+            _typeReference = new CodeTypeReference(CIMTypeToTy(_type));
+            _indexerExpression = new CodeIndexerExpression(instancePropertyReference, new CodePrimitiveExpression(_name));
         }
 
         public CodeMemberProperty GetProperty()
@@ -25,20 +28,18 @@ namespace WMIWG
             {
                 Name = _name,
                 Attributes = MemberAttributes.Public,
-                Type = _typeReference 
+                Type = _typeReference
             };
 
-            CodeIndexerExpression CodeIndexerExpression = new CodeIndexerExpression(instancePropertyReference, new CodePrimitiveExpression(_name));
-
-            Property.GetStatements.Add(new CodeMethodReturnStatement(ToReturn(CodeIndexerExpression)));
-            Property.SetStatements.Add(new CodeAssignStatement(CodeIndexerExpression, new CodeVariableReferenceExpression("value")));
+            Property.GetStatements.Add(new CodeMethodReturnStatement(ToReturn()));
+            Property.SetStatements.Add(new CodeAssignStatement(_indexerExpression, new CodeVariableReferenceExpression("value")));
             return Property;
         }
 
-        private CodeExpression ToReturn( CodeIndexerExpression CodeIndexerExpression)
+        private CodeExpression ToReturn()
         {
-            if (CimType.DateTime == _type) return new CodeMethodInvokeExpression(null, "ParseDate", CodeIndexerExpression);
-            else return new CodeCastExpression(_typeReference, CodeIndexerExpression);
+            if (CimType.DateTime == _type) return new CodeMethodInvokeExpression(null, "ParseDate", _indexerExpression);
+            else return new CodeCastExpression(_typeReference, _indexerExpression);
         }
 
         private static Type CIMTypeToTy(CimType cim)
@@ -65,5 +66,4 @@ namespace WMIWG
             }
         }
     }
-
 }
