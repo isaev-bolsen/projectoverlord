@@ -10,11 +10,13 @@ namespace WMIWG
 
         private Type _type;
         private string _name;
+        private CodeTypeReference _typeReference;
 
         public Prop(PropertyData prop)
         {
             _type = CIMTypeToTy(prop.Type);
             _name = prop.Name;
+            _typeReference = new CodeTypeReference(_type);
         }
 
         public CodeMemberProperty GetProperty()
@@ -23,20 +25,20 @@ namespace WMIWG
             {
                 Name = _name,
                 Attributes = MemberAttributes.Public,
-                Type = new CodeTypeReference(_type)
+                Type = _typeReference 
             };
 
             CodeIndexerExpression CodeIndexerExpression = new CodeIndexerExpression(instanceFieldReference, new CodePrimitiveExpression(_name));
 
-            Property.GetStatements.Add(new CodeMethodReturnStatement(ToReturn(Property, CodeIndexerExpression)));
+            Property.GetStatements.Add(new CodeMethodReturnStatement(ToReturn(CodeIndexerExpression)));
             Property.SetStatements.Add(new CodeAssignStatement(CodeIndexerExpression, new CodeVariableReferenceExpression("value")));
             return Property;
         }
 
-        private CodeExpression ToReturn(CodeMemberProperty Property, CodeIndexerExpression CodeIndexerExpression)
+        private CodeExpression ToReturn( CodeIndexerExpression CodeIndexerExpression)
         {
             if (typeof(DateTime?) == _type) return new CodeMethodInvokeExpression(null, "ParseDate", CodeIndexerExpression);
-            else return new CodeCastExpression(Property.Type, CodeIndexerExpression);
+            else return new CodeCastExpression(_typeReference, CodeIndexerExpression);
         }
 
         private static Type CIMTypeToTy(CimType cim)
