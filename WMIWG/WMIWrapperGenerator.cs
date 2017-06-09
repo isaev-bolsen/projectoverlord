@@ -65,9 +65,16 @@ namespace WMIWG
             };
 
             CodeIndexerExpression CodeIndexerExpression = new CodeIndexerExpression(instanceFieldReference, new CodePrimitiveExpression(prop.Name));
-            Property.GetStatements.Add(new CodeMethodReturnStatement(new CodeCastExpression(Property.Type, CodeIndexerExpression)));
+
+            Property.GetStatements.Add(new CodeMethodReturnStatement(ToReturn(prop, Property, CodeIndexerExpression)));
             Property.SetStatements.Add(new CodeAssignStatement(CodeIndexerExpression, new CodeVariableReferenceExpression("value")));
             return Property;
+        }
+
+        private static CodeExpression ToReturn(PropertyData prop, CodeMemberProperty Property, CodeIndexerExpression CodeIndexerExpression)
+        {
+            if (CimType.DateTime == prop.Type) return new CodeMethodInvokeExpression(null, "ParseDate", CodeIndexerExpression);
+            else return new CodeCastExpression(Property.Type, CodeIndexerExpression);
         }
 
         private Type CIMTypeToTy(CimType cim)
