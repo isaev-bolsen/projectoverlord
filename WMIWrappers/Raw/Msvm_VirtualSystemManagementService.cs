@@ -109,7 +109,7 @@ namespace WMIWrappers.Raw {
         
         public virtual System.Nullable<System.DateTime> InstallDate {
             get {
-                return ((System.Nullable<System.DateTime>)(Instance["InstallDate"]));
+                return ParseDate(Instance["InstallDate"]);
             }
             set {
                 Instance["InstallDate"] = value;
@@ -253,7 +253,7 @@ namespace WMIWrappers.Raw {
         
         public virtual System.Nullable<System.DateTime> TimeOfLastStateChange {
             get {
-                return ((System.Nullable<System.DateTime>)(Instance["TimeOfLastStateChange"]));
+                return ParseDate(Instance["TimeOfLastStateChange"]);
             }
             set {
                 Instance["TimeOfLastStateChange"] = value;

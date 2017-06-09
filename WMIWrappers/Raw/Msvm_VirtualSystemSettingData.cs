@@ -55,7 +55,7 @@ namespace WMIWrappers.Raw {
         
         public virtual System.Nullable<System.DateTime> AutomaticCriticalErrorActionTimeout {
             get {
-                return ((System.Nullable<System.DateTime>)(Instance["AutomaticCriticalErrorActionTimeout"]));
+                return ParseDate(Instance["AutomaticCriticalErrorActionTimeout"]);
             }
             set {
                 Instance["AutomaticCriticalErrorActionTimeout"] = value;
@@ -91,7 +91,7 @@ namespace WMIWrappers.Raw {
         
         public virtual System.Nullable<System.DateTime> AutomaticStartupActionDelay {
             get {
-                return ((System.Nullable<System.DateTime>)(Instance["AutomaticStartupActionDelay"]));
+                return ParseDate(Instance["AutomaticStartupActionDelay"]);
             }
             set {
                 Instance["AutomaticStartupActionDelay"] = value;
@@ -226,7 +226,7 @@ namespace WMIWrappers.Raw {
         
         public virtual System.Nullable<System.DateTime> CreationTime {
             get {
-                return ((System.Nullable<System.DateTime>)(Instance["CreationTime"]));
+                return ParseDate(Instance["CreationTime"]);
             }
             set {
                 Instance["CreationTime"] = value;

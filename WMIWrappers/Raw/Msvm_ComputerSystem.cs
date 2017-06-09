@@ -145,7 +145,7 @@ namespace WMIWrappers.Raw {
         
         public virtual System.Nullable<System.DateTime> InstallDate {
             get {
-                return ((System.Nullable<System.DateTime>)(Instance["InstallDate"]));
+                return ParseDate(Instance["InstallDate"]);
             }
             set {
                 Instance["InstallDate"] = value;
@@ -163,7 +163,7 @@ namespace WMIWrappers.Raw {
         
         public virtual System.Nullable<System.DateTime> LastApplicationConsistentReplicationTime {
             get {
-                return ((System.Nullable<System.DateTime>)(Instance["LastApplicationConsistentReplicationTime"]));
+                return ParseDate(Instance["LastApplicationConsistentReplicationTime"]);
             }
             set {
                 Instance["LastApplicationConsistentReplicationTime"] = value;
@@ -172,7 +172,7 @@ namespace WMIWrappers.Raw {
         
         public virtual System.Nullable<System.DateTime> LastReplicationTime {
             get {
-                return ((System.Nullable<System.DateTime>)(Instance["LastReplicationTime"]));
+                return ParseDate(Instance["LastReplicationTime"]);
             }
             set {
                 Instance["LastReplicationTime"] = value;
@@ -190,7 +190,7 @@ namespace WMIWrappers.Raw {
         
         public virtual System.Nullable<System.DateTime> LastSuccessfulBackupTime {
             get {
-                return ((System.Nullable<System.DateTime>)(Instance["LastSuccessfulBackupTime"]));
+                return ParseDate(Instance["LastSuccessfulBackupTime"]);
             }
             set {
                 Instance["LastSuccessfulBackupTime"] = value;
@@ -397,7 +397,7 @@ namespace WMIWrappers.Raw {
         
         public virtual System.Nullable<System.DateTime> TimeOfLastConfigurationChange {
             get {
-                return ((System.Nullable<System.DateTime>)(Instance["TimeOfLastConfigurationChange"]));
+                return ParseDate(Instance["TimeOfLastConfigurationChange"]);
             }
             set {
                 Instance["TimeOfLastConfigurationChange"] = value;
@@ -406,7 +406,7 @@ namespace WMIWrappers.Raw {
         
         public virtual System.Nullable<System.DateTime> TimeOfLastStateChange {
             get {
-                return ((System.Nullable<System.DateTime>)(Instance["TimeOfLastStateChange"]));
+                return ParseDate(Instance["TimeOfLastStateChange"]);
             }
             set {
                 Instance["TimeOfLastStateChange"] = value;
