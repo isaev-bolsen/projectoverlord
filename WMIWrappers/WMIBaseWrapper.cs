@@ -34,7 +34,10 @@ namespace WMIWrappers
 
         private void CheckProps()
         {
-            foreach (var prop in GetType().GetProperties()) prop.GetValue(this);
+            foreach (var prop in GetType().GetProperties())
+            {
+                var value = prop.GetValue(this);
+            }
         }
     }
 }

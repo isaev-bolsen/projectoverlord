@@ -8,17 +8,20 @@ namespace WMIWG
     {
         private static CodeFieldReferenceExpression instancePropertyReference = new CodeFieldReferenceExpression(null, WMIWrapperGenerator.instancePropertyName);
 
-        private CimType _type;
+        private Type _type;
+        private CimType _cimType;
         private string _name;
+
         private CodeTypeReference _typeReference;
         private CodeIndexerExpression _indexerExpression;
 
         public Prop(PropertyData prop)
         {
-            _type = prop.Type;
+            _cimType = prop.Type;
+            _type = CIMTypeToTy(_cimType);
             _name = prop.Name;
 
-            _typeReference = new CodeTypeReference(CIMTypeToTy(_type));
+            _typeReference = new CodeTypeReference(_type);
             _indexerExpression = new CodeIndexerExpression(instancePropertyReference, new CodePrimitiveExpression(_name));
         }
 
@@ -38,7 +41,7 @@ namespace WMIWG
 
         private CodeExpression ToReturn()
         {
-            if (CimType.DateTime == _type) return new CodeMethodInvokeExpression(null, "ParseDate", _indexerExpression);
+            if (CimType.DateTime == _cimType) return new CodeMethodInvokeExpression(null, "ParseDate", _indexerExpression);
             else return new CodeCastExpression(_typeReference, _indexerExpression);
         }
 
