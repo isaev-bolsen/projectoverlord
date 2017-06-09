@@ -6,17 +6,17 @@ namespace WMIWG
 {
     internal class Prop
     {
-        private static CodeFieldReferenceExpression instanceFieldReference = new CodeFieldReferenceExpression(null, WMIWrapperGenerator.instancePropertyName);
+        private static CodeFieldReferenceExpression instancePropertyReference = new CodeFieldReferenceExpression(null, WMIWrapperGenerator.instancePropertyName);
 
-        private Type _type;
+        private CimType _type;
         private string _name;
         private CodeTypeReference _typeReference;
 
         public Prop(PropertyData prop)
         {
-            _type = CIMTypeToTy(prop.Type);
+            _type = prop.Type; 
             _name = prop.Name;
-            _typeReference = new CodeTypeReference(_type);
+            _typeReference = new CodeTypeReference(CIMTypeToTy(prop.Type));
         }
 
         public CodeMemberProperty GetProperty()
@@ -28,7 +28,7 @@ namespace WMIWG
                 Type = _typeReference 
             };
 
-            CodeIndexerExpression CodeIndexerExpression = new CodeIndexerExpression(instanceFieldReference, new CodePrimitiveExpression(_name));
+            CodeIndexerExpression CodeIndexerExpression = new CodeIndexerExpression(instancePropertyReference, new CodePrimitiveExpression(_name));
 
             Property.GetStatements.Add(new CodeMethodReturnStatement(ToReturn(CodeIndexerExpression)));
             Property.SetStatements.Add(new CodeAssignStatement(CodeIndexerExpression, new CodeVariableReferenceExpression("value")));
@@ -37,7 +37,7 @@ namespace WMIWG
 
         private CodeExpression ToReturn( CodeIndexerExpression CodeIndexerExpression)
         {
-            if (typeof(DateTime?) == _type) return new CodeMethodInvokeExpression(null, "ParseDate", CodeIndexerExpression);
+            if (CimType.DateTime == _type) return new CodeMethodInvokeExpression(null, "ParseDate", CodeIndexerExpression);
             else return new CodeCastExpression(_typeReference, CodeIndexerExpression);
         }
 
