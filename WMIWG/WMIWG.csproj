@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Prop.cs" />
+    <Compile Include="Props\Prop.cs" />
+    <Compile Include="Props\PropsFactory.cs" />
     <Compile Include="WMIWrapperGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

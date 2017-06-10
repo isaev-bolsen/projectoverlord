@@ -49,7 +49,7 @@ namespace WMIWG
 
             CodeTypeDeclaration.Members.Add(CodeConstructor);
 
-            foreach (var prop in WMIObject.Properties) CodeTypeDeclaration.Members.Add(new Prop(prop).GetProperty());
+            foreach (PropertyData prop in WMIObject.Properties) CodeTypeDeclaration.Members.Add(PropsFactory.GetProperty(prop));
             return CodeTypeDeclaration;
         }
     }

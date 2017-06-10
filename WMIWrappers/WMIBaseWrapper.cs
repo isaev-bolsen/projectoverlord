@@ -14,7 +14,7 @@ namespace WMIWrappers
         {
             _instance = instance;
 #if DEBUG
-            CheckProps();
+           // CheckProps();
 #endif
         }
 

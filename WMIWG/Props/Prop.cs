@@ -2,7 +2,7 @@
 using System.CodeDom;
 using System.Management;
 
-namespace WMIWG
+namespace WMIWG.Props
 {
     internal class Prop
     {
