@@ -29,9 +29,14 @@ namespace WMIWrappers
             if (propValue.GetType() == typeof(DateTime))
                 return (DateTime)propValue;
             else
-                return ManagementDateTimeConverter.ToDateTime(propValue.ToString());
+            {
+                string WMIDate = propValue.ToString();
+                if (WMIDate.StartsWith("0000"))
+                    return DateTime.Now + ManagementDateTimeConverter.ToTimeSpan(WMIDate);
+                else
+                    return ManagementDateTimeConverter.ToDateTime(WMIDate);
+            }
         }
-
         private void CheckProps()
         {
             foreach (var prop in GetType().GetProperties())
