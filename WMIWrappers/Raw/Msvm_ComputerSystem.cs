@@ -17,9 +17,9 @@ namespace WMIWrappers.Raw {
                 base(instance) {
         }
         
-        public virtual System.Nullable<ushort> AvailableRequestedStates {
+        public virtual ushort[] AvailableRequestedStates {
             get {
-                return ((System.Nullable<ushort>)(Instance["AvailableRequestedStates"]));
+                return ((ushort[])(Instance["AvailableRequestedStates"]));
             }
             set {
                 Instance["AvailableRequestedStates"] = value;
@@ -53,9 +53,9 @@ namespace WMIWrappers.Raw {
             }
         }
         
-        public virtual System.Nullable<ushort> Dedicated {
+        public virtual ushort[] Dedicated {
             get {
-                return ((System.Nullable<ushort>)(Instance["Dedicated"]));
+                return ((ushort[])(Instance["Dedicated"]));
             }
             set {
                 Instance["Dedicated"] = value;
@@ -134,9 +134,9 @@ namespace WMIWrappers.Raw {
             }
         }
         
-        public virtual string IdentifyingDescriptions {
+        public virtual string[] IdentifyingDescriptions {
             get {
-                return ((string)(Instance["IdentifyingDescriptions"]));
+                return ((string[])(Instance["IdentifyingDescriptions"]));
             }
             set {
                 Instance["IdentifyingDescriptions"] = value;
@@ -242,18 +242,18 @@ namespace WMIWrappers.Raw {
             }
         }
         
-        public virtual System.Nullable<ushort> OperationalStatus {
+        public virtual ushort[] OperationalStatus {
             get {
-                return ((System.Nullable<ushort>)(Instance["OperationalStatus"]));
+                return ((ushort[])(Instance["OperationalStatus"]));
             }
             set {
                 Instance["OperationalStatus"] = value;
             }
         }
         
-        public virtual string OtherDedicatedDescriptions {
+        public virtual string[] OtherDedicatedDescriptions {
             get {
-                return ((string)(Instance["OtherDedicatedDescriptions"]));
+                return ((string[])(Instance["OtherDedicatedDescriptions"]));
             }
             set {
                 Instance["OtherDedicatedDescriptions"] = value;
@@ -269,18 +269,18 @@ namespace WMIWrappers.Raw {
             }
         }
         
-        public virtual string OtherIdentifyingInfo {
+        public virtual string[] OtherIdentifyingInfo {
             get {
-                return ((string)(Instance["OtherIdentifyingInfo"]));
+                return ((string[])(Instance["OtherIdentifyingInfo"]));
             }
             set {
                 Instance["OtherIdentifyingInfo"] = value;
             }
         }
         
-        public virtual System.Nullable<ushort> PowerManagementCapabilities {
+        public virtual ushort[] PowerManagementCapabilities {
             get {
-                return ((System.Nullable<ushort>)(Instance["PowerManagementCapabilities"]));
+                return ((ushort[])(Instance["PowerManagementCapabilities"]));
             }
             set {
                 Instance["PowerManagementCapabilities"] = value;
@@ -368,9 +368,9 @@ namespace WMIWrappers.Raw {
             }
         }
         
-        public virtual string Roles {
+        public virtual string[] Roles {
             get {
-                return ((string)(Instance["Roles"]));
+                return ((string[])(Instance["Roles"]));
             }
             set {
                 Instance["Roles"] = value;
@@ -386,9 +386,9 @@ namespace WMIWrappers.Raw {
             }
         }
         
-        public virtual string StatusDescriptions {
+        public virtual string[] StatusDescriptions {
             get {
-                return ((string)(Instance["StatusDescriptions"]));
+                return ((string[])(Instance["StatusDescriptions"]));
             }
             set {
                 Instance["StatusDescriptions"] = value;

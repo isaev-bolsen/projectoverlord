@@ -17,9 +17,9 @@ namespace WMIWrappers.Raw {
                 base(instance) {
         }
         
-        public virtual System.Nullable<ushort> AvailableRequestedStates {
+        public virtual ushort[] AvailableRequestedStates {
             get {
-                return ((System.Nullable<ushort>)(Instance["AvailableRequestedStates"]));
+                return ((ushort[])(Instance["AvailableRequestedStates"]));
             }
             set {
                 Instance["AvailableRequestedStates"] = value;
@@ -143,9 +143,9 @@ namespace WMIWrappers.Raw {
             }
         }
         
-        public virtual System.Nullable<ushort> OperationalStatus {
+        public virtual ushort[] OperationalStatus {
             get {
-                return ((System.Nullable<ushort>)(Instance["OperationalStatus"]));
+                return ((ushort[])(Instance["OperationalStatus"]));
             }
             set {
                 Instance["OperationalStatus"] = value;
@@ -224,9 +224,9 @@ namespace WMIWrappers.Raw {
             }
         }
         
-        public virtual string StatusDescriptions {
+        public virtual string[] StatusDescriptions {
             get {
-                return ((string)(Instance["StatusDescriptions"]));
+                return ((string[])(Instance["StatusDescriptions"]));
             }
             set {
                 Instance["StatusDescriptions"] = value;

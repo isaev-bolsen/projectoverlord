@@ -143,18 +143,18 @@ namespace WMIWrappers.Raw {
             }
         }
         
-        public virtual System.Nullable<ushort> BootOrder {
+        public virtual ushort[] BootOrder {
             get {
-                return ((System.Nullable<ushort>)(Instance["BootOrder"]));
+                return ((ushort[])(Instance["BootOrder"]));
             }
             set {
                 Instance["BootOrder"] = value;
             }
         }
         
-        public virtual string BootSourceOrder {
+        public virtual string[] BootSourceOrder {
             get {
-                return ((string)(Instance["BootSourceOrder"]));
+                return ((string[])(Instance["BootSourceOrder"]));
             }
             set {
                 Instance["BootSourceOrder"] = value;
@@ -359,9 +359,9 @@ namespace WMIWrappers.Raw {
             }
         }
         
-        public virtual string Notes {
+        public virtual string[] Notes {
             get {
-                return ((string)(Instance["Notes"]));
+                return ((string[])(Instance["Notes"]));
             }
             set {
                 Instance["Notes"] = value;
