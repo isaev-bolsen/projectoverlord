@@ -8,7 +8,8 @@ namespace WMIWG
     {
         public static CodeMemberProperty GetProperty(PropertyData prop)
         {
-            return new Prop(prop).GetProperty();
+            if (prop.IsArray) return new ArrayProp(prop).GetProperty();
+            else return new Prop(prop).GetProperty();
         }
     }
 }
