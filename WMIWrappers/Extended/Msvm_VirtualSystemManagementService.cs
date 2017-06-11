@@ -24,7 +24,6 @@ namespace WMIWrappers.Extended
 
         private const string DefineSystemWMIMethod = "DefineSystem";
         private const string ModifySystemWMIMEthod = "ModifySystemSettings";
-        private const string VSSettingsData = "Msvm_VirtualSystemSettingData";
 
         private const uint ERROR_SUCCESS = 0;
         private const uint ERROR_INV_ARGUMENTS = 87;
