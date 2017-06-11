@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Management;
+using WMIWG;
 
 namespace WMIWrappers
 {
@@ -14,6 +15,7 @@ namespace WMIWrappers
         {
             _instance = instance;
 #if DEBUG
+            new WMIWrapperGenerator().Generate(Instance);
             CheckProps();
 #endif
         }

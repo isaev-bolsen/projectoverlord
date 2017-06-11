@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Management;
-using WMIWG;
 
 namespace WMIWrappers.Extended
 {
@@ -9,12 +8,7 @@ namespace WMIWrappers.Extended
         private const string VSSettingsData = "Msvm_VirtualSystemSettingData";
         private const string RequestStateChange = "RequestStateChange";
 
-        public Msvm_ComputerSystem(ManagementObject instance) : base(instance)
-        {
-#if DEBUG
-            new WMIWrapperGenerator().Generate(Instance);
-#endif
-        }
+        public Msvm_ComputerSystem(ManagementObject instance) : base(instance) { }
 
         public Msvm_VirtualSystemSettingData GetMsvm_VirtualSystemSettingData()
         {

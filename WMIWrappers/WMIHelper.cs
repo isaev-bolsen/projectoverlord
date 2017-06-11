@@ -20,11 +20,7 @@ namespace WMIWrappers
 
         public ManagementObjectCollection GetByClassName(string classname)
         {
-            ManagementObjectCollection res = new ManagementObjectSearcher(_managementScope, new ObjectQuery("select * from " + classname)).Get();
-#if DEBUG
-            if (res.Count > 0) new WMIWrapperGenerator().Generate(res.OfType<ManagementBaseObject>().Last());
-#endif
-            return res;
+            return new ManagementObjectSearcher(_managementScope, new ObjectQuery("select * from " + classname)).Get();
         }
     }
 }
