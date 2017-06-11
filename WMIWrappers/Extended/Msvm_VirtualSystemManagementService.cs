@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Management;
-using WMIWrappers;
-using WMIWrappers.Extended;
 
-namespace projectoverlord.HyperVAdapter
+namespace WMIWrappers.Extended
 {
-    public class VirtualSystemManagementService
+    public class Msvm_VirtualSystemManagementService : Raw.Msvm_VirtualSystemManagementService
     {
-        public class DefineSystemResult
+        private class DefineSystemResult
         {
             public readonly string VMPath;
 
@@ -30,31 +28,29 @@ namespace projectoverlord.HyperVAdapter
 
         private const uint ERROR_SUCCESS = 0;
         private const uint ERROR_INV_ARGUMENTS = 87;
-        private readonly WMIScope WMIHelper;
-        private readonly ManagementObject VMManagementService;
 
         public Action<string, object[]> Log = Console.WriteLine;
 
-        public VirtualSystemManagementService(string host)
+        public Msvm_VirtualSystemManagementService(string host) :
+            base(new WMIScope(Environment.MachineName, "root", "virtualization", "v2").
+                GetByClassName("Msvm_VirtualSystemManagementService").OfType<ManagementObject>().Single())
         {
-            WMIHelper = new WMIScope(Environment.MachineName, "root", "virtualization", "v2");
-            VMManagementService = WMIHelper.GetByClassName("Msvm_VirtualSystemManagementService").OfType<ManagementObject>().Single();
         }
 
         public void CreateVm(string displayName)
         {
-            Msvm_ComputerSystem computerSystem = new DefineSystemResult(VMManagementService.InvokeMethod(
+            Msvm_ComputerSystem computerSystem = new DefineSystemResult(Instance.InvokeMethod(
                      DefineSystemWMIMethod,
-                     VMManagementService.GetMethodParameters(DefineSystemWMIMethod),
+                     Instance.GetMethodParameters(DefineSystemWMIMethod),
                      null
                      )).GetResultingVM();
 
             Msvm_VirtualSystemSettingData VMSettings = computerSystem.GetMsvm_VirtualSystemSettingData();
             VMSettings.ElementName = displayName;
 
-            ManagementBaseObject inParams = VMManagementService.GetMethodParameters(ModifySystemWMIMEthod);
+            ManagementBaseObject inParams = Instance.GetMethodParameters(ModifySystemWMIMEthod);
             inParams["SystemSettings"] = VMSettings.ToWmiDtd20String();
-            VMManagementService.InvokeMethod(ModifySystemWMIMEthod, inParams, null);
+            Instance.InvokeMethod(ModifySystemWMIMEthod, inParams, null);
             computerSystem.TurnOn();
         }
     }

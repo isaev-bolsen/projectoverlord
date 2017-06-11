@@ -49,9 +49,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\projectoverlord\projectoverlord.HyperVAdapter.csproj">
-      <Project>{d4ea0484-6ca4-41fe-8038-3c979a79d65f}</Project>
-      <Name>projectoverlord.HyperVAdapter</Name>
+    <ProjectReference Include="..\WMIWrappers\WMIWrappers.csproj">
+      <Project>{191c988f-308f-46c6-8df1-bbdfa861e36f}</Project>
+      <Name>WMIWrappers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
