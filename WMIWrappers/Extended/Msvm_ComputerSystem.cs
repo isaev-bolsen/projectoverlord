@@ -12,7 +12,7 @@ namespace WMIWrappers.Extended
 
         public Msvm_VirtualSystemSettingData GetMsvm_VirtualSystemSettingData()
         {
-            return new WMIHelper(Instance.Scope).GetByClassName(VSSettingsData).OfType<ManagementObject>().
+            return new WMIScope(Instance.Scope).GetByClassName(VSSettingsData).OfType<ManagementObject>().
                 Select(o => new Msvm_VirtualSystemSettingData(o)).Single(s => s.VirtualSystemIdentifier == Name);
         }
 

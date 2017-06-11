@@ -30,14 +30,14 @@ namespace projectoverlord.HyperVAdapter
 
         private const uint ERROR_SUCCESS = 0;
         private const uint ERROR_INV_ARGUMENTS = 87;
-        private readonly WMIHelper WMIHelper;
+        private readonly WMIScope WMIHelper;
         private readonly ManagementObject VMManagementService;
 
         public Action<string, object[]> Log = Console.WriteLine;
 
         public VirtualSystemManagementService(string host)
         {
-            WMIHelper = new WMIHelper(Environment.MachineName, "root", "virtualization", "v2");
+            WMIHelper = new WMIScope(Environment.MachineName, "root", "virtualization", "v2");
             VMManagementService = WMIHelper.GetByClassName("Msvm_VirtualSystemManagementService").OfType<ManagementObject>().Single();
         }
 
