@@ -8,11 +8,15 @@ namespace WMIWrappers.Extended
     {
         private class DefineSystemResult
         {
+            private const uint ERROR_SUCCESS = 0;
+            //private const uint ERROR_INV_ARGUMENTS = 87;
             public readonly string VMPath;
 
             internal DefineSystemResult(ManagementBaseObject operationResult)
             {
-                if ((uint)operationResult["ReturnValue"] != ERROR_SUCCESS) throw new InvalidOperationException(DefineSystemWMIMethod + " failed");
+                if ((uint)operationResult["ReturnValue"] != ERROR_SUCCESS)
+                    throw new InvalidOperationException(string.Join(" ", DefineSystemWMIMethod, "failed with error", operationResult["ReturnValue"]));
+
                 VMPath = operationResult["ResultingSystem"].ToString();
             }
 
@@ -24,11 +28,6 @@ namespace WMIWrappers.Extended
 
         private const string DefineSystemWMIMethod = "DefineSystem";
         private const string ModifySystemWMIMEthod = "ModifySystemSettings";
-
-        private const uint ERROR_SUCCESS = 0;
-        private const uint ERROR_INV_ARGUMENTS = 87;
-
-        public Action<string, object[]> Log = Console.WriteLine;
 
         public Msvm_VirtualSystemManagementService(string host) :
             base(new WMIScope(Environment.MachineName, "root", "virtualization", "v2").
