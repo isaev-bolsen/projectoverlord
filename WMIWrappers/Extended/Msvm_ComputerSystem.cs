@@ -16,6 +16,20 @@ namespace WMIWrappers.Extended
                 Select(o => new Msvm_VirtualSystemSettingData(o)).Single(s => s.VirtualSystemIdentifier == Name);
         }
 
+        public WMIWrapper GetLastSnapshot()
+        {
+            ManagementObject LastSnapshot = Instance.GetRelated(
+                VSSettingsData,
+                "Msvm_MostCurrentSnapshotInBranch",
+                null,
+                null,
+                "Dependent",
+                "Antecedent",
+                false,
+                null).OfType<ManagementObject>().Last();
+            return new WMIWrapper(LastSnapshot);
+        }
+
         private void SetState(uint state)
         {
             ManagementBaseObject pms = Instance.GetMethodParameters(RequestStateChange);
