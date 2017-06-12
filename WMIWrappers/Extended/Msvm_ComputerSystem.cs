@@ -10,12 +10,21 @@ namespace WMIWrappers.Extended
 
         public Msvm_ComputerSystem(ManagementObject instance) : base(instance) { }
 
+        /// <summary>
+        /// same result as public WMIWrapper GetLastSnapshot()
+        /// </summary>
+        /// <returns></returns>
         public Msvm_VirtualSystemSettingData GetMsvm_VirtualSystemSettingData()
         {
             return WMIScope.GetByClassName(VSSettingsData).OfType<ManagementObject>().
                 Select(o => new Msvm_VirtualSystemSettingData(o)).Single(s => s.VirtualSystemIdentifier == Name);
         }
 
+        /// <summary>
+        /// From https://msdn.microsoft.com/ru-ru/library/hh850048(v=vs.85).aspx
+        /// Same result as public Msvm_VirtualSystemSettingData GetMsvm_VirtualSystemSettingData()
+        /// </summary>
+        /// <returns></returns>
         public WMIWrapper GetLastSnapshot()
         {
             ManagementObject LastSnapshot = Instance.GetRelated(
