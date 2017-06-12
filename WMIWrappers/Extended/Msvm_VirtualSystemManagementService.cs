@@ -35,7 +35,13 @@ namespace WMIWrappers.Extended
         {
         }
 
-        public void CreateVm(string displayName)
+        public Msvm_ComputerSystem GetVMByDispalyName(string displayName)
+        {
+            return WMIScope.GetByClassName("Msvm_ComputerSystem").OfType<ManagementObject>().Select(o => new Msvm_ComputerSystem(o)).
+                Single(o => o.ElementName == displayName);
+        }
+
+        public Msvm_ComputerSystem CreateVm(string displayName)
         {
             Msvm_ComputerSystem computerSystem = new DefineSystemResult(Instance.InvokeMethod(
                      DefineSystemWMIMethod,
@@ -50,6 +56,7 @@ namespace WMIWrappers.Extended
             inParams["SystemSettings"] = VMSettings.ToWmiDtd20String();
             Instance.InvokeMethod(ModifySystemWMIMEthod, inParams, null);
             computerSystem.TurnOn();
+            return computerSystem;
         }
     }
 }
