@@ -4,7 +4,7 @@ using WMIWG;
 
 namespace WMIWrappers
 {
-    public abstract class WMIWrapper
+    public class WMIWrapper
     {
         private ManagementObject _instance;
 
