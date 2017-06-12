@@ -27,7 +27,7 @@ namespace WMIWrappers.Extended
                 "Antecedent",
                 false,
                 null).OfType<ManagementObject>().Last();
-            return new WMIWrapper(LastSnapshot);
+            return new Msvm_VirtualSystemSettingData(LastSnapshot);
         }
 
         private void SetState(uint state)
