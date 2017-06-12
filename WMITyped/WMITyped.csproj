@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E6C3F079-9013-411E-8805-D4FD378F8AD4}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>projectoverlord.Tester1</RootNamespace>
-    <AssemblyName>projectoverlord.Tester1</AssemblyName>
+    <ProjectGuid>{276FE311-4473-43AE-8307-BDCBA7E47EC4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WMITyped</RootNamespace>
+    <AssemblyName>WMITyped</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,20 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WMIBaseWrapper.cs" />
+    <Compile Include="WMIHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WMITyped\WMITyped.csproj">
-      <Project>{276fe311-4473-43ae-8307-bdcba7e47ec4}</Project>
-      <Name>WMITyped</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WMIWrappers\WMIWrappers.csproj">
-      <Project>{191c988f-308f-46c6-8df1-bbdfa861e36f}</Project>
-      <Name>WMIWrappers</Name>
+    <ProjectReference Include="..\WMIWG\WMIWG.csproj">
+      <Project>{e1b7eadd-02b2-4b43-9889-cb222c252b3a}</Project>
+      <Name>WMIWG</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

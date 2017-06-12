@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMIWG", "WMIWG\WMIWG.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMIWrappers", "WMIWrappers\WMIWrappers.csproj", "{191C988F-308F-46C6-8DF1-BBDFA861E36F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMITyped", "WMITyped\WMITyped.csproj", "{276FE311-4473-43AE-8307-BDCBA7E47EC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{191C988F-308F-46C6-8DF1-BBDFA861E36F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{191C988F-308F-46C6-8DF1-BBDFA861E36F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{191C988F-308F-46C6-8DF1-BBDFA861E36F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{276FE311-4473-43AE-8307-BDCBA7E47EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{276FE311-4473-43AE-8307-BDCBA7E47EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{276FE311-4473-43AE-8307-BDCBA7E47EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{276FE311-4473-43AE-8307-BDCBA7E47EC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
