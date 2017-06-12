@@ -12,7 +12,7 @@ namespace WMIWrappers
         protected ManagementScope Scope => Instance.Scope;
         protected WMIScope WMIScope => new WMIScope(Scope);
 
-        protected WMIWrapper(ManagementObject instance)
+        public WMIWrapper(ManagementObject instance)
         {
             _instance = instance;
 #if DEBUG
