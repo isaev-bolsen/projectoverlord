@@ -9,17 +9,26 @@ namespace projectoverlord.Tester2
     [TestClass]
     public class Msvm_VirtualSystemManagementServiceTest
     {
-        const string VMName = "EXAMPLE";
+        const string ExampleVMName = "EXAMPLE";
+        const string RootVMName = "Root";
 
         [TestMethod]
         public void CreateWithDefault()
         {
             Msvm_VirtualSystemManagementService VSMService = new Msvm_VirtualSystemManagementService(Environment.MachineName);
-            IEnumerable<Msvm_ComputerSystem> ExistingVMs = VSMService.GetVMByDispalyName(VMName);
-            Msvm_ComputerSystem newOne = VSMService.CreateVm(VMName);
-            IEnumerable<Msvm_ComputerSystem> After = VSMService.GetVMByDispalyName(VMName);
+            IEnumerable<Msvm_ComputerSystem> ExistingVMs = VSMService.GetVMByDispalyName(ExampleVMName);
+            Msvm_ComputerSystem newOne = VSMService.CreateVm(ExampleVMName);
+            IEnumerable<Msvm_ComputerSystem> After = VSMService.GetVMByDispalyName(ExampleVMName);
 
             Assert.AreEqual(ExistingVMs.Count() + 1, After.Count());
+        }
+
+        [TestMethod]
+        public void ExportSnapshot()
+        {
+            Msvm_VirtualSystemManagementService VSMService = new Msvm_VirtualSystemManagementService(Environment.MachineName);
+            Msvm_ComputerSystem RootVM = VSMService.GetVMByDispalyName(RootVMName).Single();
+            RootVM.GetLastSnapshot();
         }
     }
 }
