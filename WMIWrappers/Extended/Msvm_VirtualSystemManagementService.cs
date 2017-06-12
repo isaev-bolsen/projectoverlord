@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Management;
 
@@ -35,10 +36,10 @@ namespace WMIWrappers.Extended
         {
         }
 
-        public Msvm_ComputerSystem GetVMByDispalyName(string displayName)
+        public IEnumerable<Msvm_ComputerSystem> GetVMByDispalyName(string displayName)
         {
             return WMIScope.GetByClassName("Msvm_ComputerSystem").OfType<ManagementObject>().Select(o => new Msvm_ComputerSystem(o)).
-                Single(o => o.ElementName == displayName);
+                Where(o => o.ElementName == displayName);
         }
 
         public Msvm_ComputerSystem CreateVm(string displayName)
