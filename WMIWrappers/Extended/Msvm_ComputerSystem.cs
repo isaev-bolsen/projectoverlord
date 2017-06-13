@@ -25,7 +25,7 @@ namespace WMIWrappers.Extended
         /// Same result as public Msvm_VirtualSystemSettingData GetMsvm_VirtualSystemSettingData()
         /// </summary>
         /// <returns></returns>
-        public WMIWrapper GetLastSnapshot()
+        public Msvm_VirtualSystemSettingData GetLastSnapshot()
         {
             ManagementObject LastSnapshot = Instance.GetRelated(
                 VSSettingsData,
