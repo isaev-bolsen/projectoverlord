@@ -40,6 +40,7 @@ namespace WMIWrappers
                     return ManagementDateTimeConverter.ToDateTime(WMIDate);
             }
         }
+
         private void CheckProps()
         {
             foreach (var prop in GetType().GetProperties())
