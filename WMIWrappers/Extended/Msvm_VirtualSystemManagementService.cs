@@ -69,8 +69,13 @@ namespace WMIWrappers.Extended
             Msvm_ComputerSystem vm = GetVMByDispalyName(displayName).OfType<Msvm_ComputerSystem>().Last();
 
             Msvm_VirtualSystemExportSettingData Msvm_VirtualSystemExportSettingData = new Msvm_VirtualSystemExportSettingData(WMIScope);
+            Msvm_VirtualSystemExportSettingData.CopySnapshotConfiguration = 2;
+            Msvm_VirtualSystemExportSettingData.CreateVmExportSubdirectory = true;
+            Msvm_VirtualSystemExportSettingData.SnapshotVirtualSystem = vm.GetLastSnapshot().Path.Path;
 
             parameters["ComputerSystem"] = vm.Path.Path;
+            parameters["ExportDirectory"] = dir.FullName;
+            parameters["ExportSettingData"] = Msvm_VirtualSystemExportSettingData.ToWmiDtd20String();
         }
     }
 }
