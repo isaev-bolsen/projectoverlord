@@ -7,10 +7,5 @@ namespace WMIWrappers.Extended
         public Msvm_VirtualSystemSettingData(ManagementObject instance) : base(instance)
         {
         }
-
-        public string ToWmiDtd20String()
-        {
-            return Instance.GetText(TextFormat.WmiDtd20);
-        }
     }
 }
