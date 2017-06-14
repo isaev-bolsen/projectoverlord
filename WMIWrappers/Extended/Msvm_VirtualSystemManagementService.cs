@@ -29,6 +29,7 @@ namespace WMIWrappers.Extended
 
         private const string DefineSystemWMIMethod = "DefineSystem";
         private const string ModifySystemWMIMEthod = "ModifySystemSettings";
+        private const string ExportSystemDefinitionMethod = "ExportSystemDefinition";
 
         public Msvm_VirtualSystemManagementService(string host) :
             base(new WMIScope(Environment.MachineName, "root", "virtualization", "v2").
@@ -58,6 +59,18 @@ namespace WMIWrappers.Extended
             Instance.InvokeMethod(ModifySystemWMIMEthod, inParams, null);
             computerSystem.TurnOn();
             return computerSystem;
+        }
+
+        public void ExportSystemDefinition(string displayName, System.IO.DirectoryInfo dir )
+        {
+            if (!dir.Exists) throw new System.IO.DirectoryNotFoundException("Not found: " + dir);
+
+            ManagementBaseObject parameters = Instance.GetMethodParameters(ExportSystemDefinitionMethod);
+            Msvm_ComputerSystem vm = GetVMByDispalyName(displayName).OfType<Msvm_ComputerSystem>().Last();
+
+            Msvm_VirtualSystemExportSettingData Msvm_VirtualSystemExportSettingData = new Msvm_VirtualSystemExportSettingData(WMIScope);
+
+            parameters["ComputerSystem"] = vm.Path.Path;
         }
     }
 }

@@ -27,6 +27,8 @@ namespace projectoverlord.Tester2
         public void ExportSnapshot()
         {
             Msvm_VirtualSystemManagementService VSMService = new Msvm_VirtualSystemManagementService(Environment.MachineName);
+            VSMService.ExportSystemDefinition(RootVMName, new System.IO.DirectoryInfo(Environment.CurrentDirectory).CreateSubdirectory("snapshots"));
+
             Msvm_ComputerSystem RootVM = VSMService.GetVMByDispalyName(RootVMName).Single();
             RootVM.GetLastSnapshot();
         }
