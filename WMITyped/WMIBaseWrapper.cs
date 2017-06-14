@@ -12,6 +12,8 @@ namespace WMIWrappers
         protected ManagementScope Scope => Instance.Scope;
         protected WMIScope WMIScope => new WMIScope(Scope);
 
+        public ManagementPath Path => Instance.Path;
+
         public WMIWrapper(ManagementObject instance)
         {
             _instance = instance;
@@ -39,6 +41,11 @@ namespace WMIWrappers
                 else
                     return ManagementDateTimeConverter.ToDateTime(WMIDate);
             }
+        }
+
+        public string ToWmiDtd20String()
+        {
+            return Instance.GetText(TextFormat.WmiDtd20);
         }
 
         private void CheckProps()
