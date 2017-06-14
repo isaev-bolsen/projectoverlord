@@ -39,5 +39,15 @@ namespace WMIWrappers
         {
             return new ManagementObjectSearcher(_managementScope, new ObjectQuery("select * from " + classname)).Get();
         }
+
+        /// <summary>
+        /// Returns New object of specified class
+        /// </summary>
+        /// <param name="ClassName">Name of WMI Class</param>
+        /// <returns>new object</returns>
+        public ManagementObject GetNewInstanceOfClass(string ClassName)
+        {
+            return new ManagementClass(_managementScope, new ManagementPath(ClassName), null).CreateInstance();
+        }
     }
 }
