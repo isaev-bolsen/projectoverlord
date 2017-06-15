@@ -76,6 +76,8 @@ namespace WMIWrappers.Extended
             parameters["ComputerSystem"] = vm.Path.Path;
             parameters["ExportDirectory"] = dir.FullName;
             parameters["ExportSettingData"] = Msvm_VirtualSystemExportSettingData.ToWmiDtd20String();
+
+            ManagementBaseObject outParams = Instance.InvokeMethod("ExportSystemDefinition", parameters, null);
         }
     }
 }
