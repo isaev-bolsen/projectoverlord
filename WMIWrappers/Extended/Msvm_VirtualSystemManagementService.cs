@@ -7,18 +7,14 @@ namespace WMIWrappers.Extended
 {
     public class Msvm_VirtualSystemManagementService : Raw.Msvm_VirtualSystemManagementService
     {
-        private class DefineSystemResult
+        private class DefineSystemResult : WMIMethodInvokeResult
         {
-            private const uint ERROR_SUCCESS = 0;
-            //private const uint ERROR_INV_ARGUMENTS = 87;
-            public readonly string VMPath;
+            public string VMPath => Instance["ResultingSystem"].ToString();
 
-            internal DefineSystemResult(ManagementBaseObject operationResult)
+            internal DefineSystemResult(ManagementBaseObject operationResult) : base(operationResult)
             {
-                if ((uint)operationResult["ReturnValue"] != ERROR_SUCCESS)
+                if (OperationResult != ERROR_SUCCESS)
                     throw new InvalidOperationException(string.Join(" ", DefineSystemWMIMethod, "failed with error", operationResult["ReturnValue"]));
-
-                VMPath = operationResult["ResultingSystem"].ToString();
             }
 
             public Msvm_ComputerSystem GetResultingVM()
@@ -77,7 +73,7 @@ namespace WMIWrappers.Extended
             parameters["ExportDirectory"] = dir.FullName;
             parameters["ExportSettingData"] = Msvm_VirtualSystemExportSettingData.ToWmiDtd20String();
 
-            ManagementBaseObject outParams = Instance.InvokeMethod("ExportSystemDefinition", parameters, null);
+            var res = new WMIMethodInvokeResult(Instance.InvokeMethod("ExportSystemDefinition", parameters, null));
         }
     }
 }
