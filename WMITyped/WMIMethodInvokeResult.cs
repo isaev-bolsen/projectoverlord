@@ -11,7 +11,7 @@ namespace WMIWrappers
         protected ManagementBaseObject Instance => _instance;
 
         public uint OperationResult => (uint)Instance["ReturnValue"];
-        public ManagementBaseObject Job => Instance["Job"] as ManagementBaseObject;
+        public ManagementObject Job => new ManagementObject(Instance["Job"].ToString());
 
         public WMIMethodInvokeResult(ManagementBaseObject instance)
         {

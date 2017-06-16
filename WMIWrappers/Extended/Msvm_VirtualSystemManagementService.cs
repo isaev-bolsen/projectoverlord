@@ -74,6 +74,7 @@ namespace WMIWrappers.Extended
             parameters["ExportSettingData"] = Msvm_VirtualSystemExportSettingData.ToWmiDtd20String();
 
             var res = new WMIMethodInvokeResult(Instance.InvokeMethod("ExportSystemDefinition", parameters, null));
+            var job = new Msvm_ConcreteJob(res.Job);
         }
     }
 }
