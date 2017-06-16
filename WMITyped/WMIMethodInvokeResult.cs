@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Management;
-using WMIWG;
+﻿using System.Management;
 
 namespace WMIWrappers
 {
@@ -18,6 +11,7 @@ namespace WMIWrappers
         protected ManagementBaseObject Instance => _instance;
 
         public uint OperationResult => (uint)Instance["ReturnValue"];
+        public ManagementBaseObject Job => Instance["Job"] as ManagementBaseObject;
 
         public WMIMethodInvokeResult(ManagementBaseObject instance)
         {
