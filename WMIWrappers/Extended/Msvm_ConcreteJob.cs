@@ -15,6 +15,7 @@ namespace WMIWrappers.Extended
             while (true)
             {
                 Task.Delay(2000).Wait();
+                Refresh();
                 switch (JobState)
                 {
                     case 2://New
@@ -30,7 +31,7 @@ namespace WMIWrappers.Extended
                     case 9:
                         throw new ApplicationException("Job was aborted!");
                     case 10:
-                        throw new ApplicationException("Job failed!");
+                        throw new ApplicationException("Job failed: " + ErrorDescription);
                     default: throw new ApplicationException("Unknown State");
                 }
             }

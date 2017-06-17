@@ -75,6 +75,7 @@ namespace WMIWrappers.Extended
 
             var res = new WMIMethodInvokeResult(Instance.InvokeMethod("ExportSystemDefinition", parameters, null));
             var job = new Msvm_ConcreteJob(res.Job);
+            job.Await();
         }
     }
 }
