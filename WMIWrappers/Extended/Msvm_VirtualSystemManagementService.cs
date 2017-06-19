@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Management;
 
@@ -28,7 +29,7 @@ namespace WMIWrappers.Extended
         private const string ExportSystemDefinitionMethod = "ExportSystemDefinition";
 
         public Msvm_VirtualSystemManagementService(string host) :
-            base(new WMIScope(Environment.MachineName, "root", "virtualization", "v2").
+            base(new WMIScope(host, "root", "virtualization", "v2").
                 GetByClassName("Msvm_VirtualSystemManagementService").OfType<ManagementObject>().Single())
         {
         }
@@ -57,9 +58,9 @@ namespace WMIWrappers.Extended
             return computerSystem;
         }
 
-        public void ExportSystemDefinition(string displayName, System.IO.DirectoryInfo dir )
+        public void ExportSystemDefinition(string displayName, DirectoryInfo dir)
         {
-            if (!dir.Exists) throw new System.IO.DirectoryNotFoundException("Not found: " + dir);
+            if (!dir.Exists) throw new DirectoryNotFoundException("Not found: " + dir);
 
             ManagementBaseObject parameters = Instance.GetMethodParameters(ExportSystemDefinitionMethod);
             Msvm_ComputerSystem vm = GetVMByDispalyName(displayName).OfType<Msvm_ComputerSystem>().Last();
@@ -76,6 +77,13 @@ namespace WMIWrappers.Extended
             var res = new WMIMethodInvokeResult(Instance.InvokeMethod("ExportSystemDefinition", parameters, null));
             var job = new Msvm_ConcreteJob(res.Job);
             job.Await();
+        }
+
+        public void ImportSystemDefinition(string VMName, DirectoryInfo dir)
+        {
+            ManagementBaseObject inParams = Instance.GetMethodParameters("GetVirtualSystemImportSettingData");
+
+            throw new NotImplementedException();
         }
     }
 }

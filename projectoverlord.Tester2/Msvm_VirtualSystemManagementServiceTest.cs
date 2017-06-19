@@ -26,11 +26,11 @@ namespace projectoverlord.Tester2
         [TestMethod]
         public void ExportSnapshot()
         {
-            Msvm_VirtualSystemManagementService VSMService = new Msvm_VirtualSystemManagementService(Environment.MachineName);
-            VSMService.ExportSystemDefinition(RootVMName, new System.IO.DirectoryInfo(Environment.CurrentDirectory).CreateSubdirectory("snapshots"));
+            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(Environment.CurrentDirectory).CreateSubdirectory("snapshots");
 
-            Msvm_ComputerSystem RootVM = VSMService.GetVMByDispalyName(RootVMName).Single();
-            RootVM.GetLastSnapshot();
+            Msvm_VirtualSystemManagementService VSMService = new Msvm_VirtualSystemManagementService(Environment.MachineName);
+            VSMService.ExportSystemDefinition(RootVMName, dir);
+            VSMService.ImportSystemDefinition("Copy", dir);
         }
     }
 }
