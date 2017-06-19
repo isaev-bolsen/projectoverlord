@@ -82,6 +82,8 @@ namespace WMIWrappers.Extended
         public void ImportSystemDefinition(string VMName, DirectoryInfo dir)
         {
             ManagementBaseObject inParams = Instance.GetMethodParameters("GetVirtualSystemImportSettingData");
+            inParams["ImportDirectory"] = dir.FullName;
+            ManagementBaseObject outParams = Instance.InvokeMethod("GetVirtualSystemImportSettingData", inParams, null);
 
             throw new NotImplementedException();
         }
