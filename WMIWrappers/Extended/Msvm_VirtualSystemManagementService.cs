@@ -24,6 +24,22 @@ namespace WMIWrappers.Extended
             }
         }
 
+        private class ImportSystemResult : WMIMethodInvokeResult
+        {
+            public string PlannedVM => Instance["ImportedSystem"].ToString();
+
+            internal ImportSystemResult(ManagementBaseObject operationResult) : base(operationResult)
+            {
+                if (OperationResult != ERROR_SUCCESS)
+                    throw new InvalidOperationException(string.Join(" ", DefineSystemWMIMethod, "failed with error", operationResult["ReturnValue"]));
+            }
+
+            public Msvm_PlannedComputerSystem GetResultingVM()
+            {
+                return new Msvm_PlannedComputerSystem(new ManagementObject(PlannedVM));
+            }
+        }
+
         private const string DefineSystemWMIMethod = "DefineSystem";
         private const string ModifySystemWMIMEthod = "ModifySystemSettings";
         private const string ExportSystemDefinitionMethod = "ExportSystemDefinition";
@@ -74,17 +90,23 @@ namespace WMIWrappers.Extended
             parameters["ExportDirectory"] = dir.FullName;
             parameters["ExportSettingData"] = Msvm_VirtualSystemExportSettingData.ToWmiDtd20String();
 
-            var res = new WMIMethodInvokeResult(Instance.InvokeMethod("ExportSystemDefinition", parameters, null));
-            var job = new Msvm_ConcreteJob(res.Job);
+            WMIMethodInvokeResult res = new WMIMethodInvokeResult(Instance.InvokeMethod("ExportSystemDefinition", parameters, null));
+            Msvm_ConcreteJob job = new Msvm_ConcreteJob(res.Job);
             job.Await();
         }
 
         public void ImportSystemDefinition(string VMName, DirectoryInfo dir)
         {
-            ManagementBaseObject inParams = Instance.GetMethodParameters("GetVirtualSystemImportSettingData");
-            inParams["ImportDirectory"] = dir.FullName;
-            ManagementBaseObject outParams = Instance.InvokeMethod("GetVirtualSystemImportSettingData", inParams, null);
+            ManagementBaseObject inParams = Instance.GetMethodParameters("ImportSystemDefinition");
+            string VMFILE = dir.GetFiles("*.vmcx", SearchOption.AllDirectories).Single().FullName;
 
+            inParams["SnapshotFolder"] = dir.FullName;
+            inParams["SystemDefinitionFile"] = VMFILE;
+            inParams["GenerateNewSystemIdentifier"] = true;
+
+            ImportSystemResult res = new ImportSystemResult(Instance.InvokeMethod("ImportSystemDefinition", inParams, null));
+            Msvm_PlannedComputerSystem vm = res.GetResultingVM();
+   
             throw new NotImplementedException();
         }
     }
