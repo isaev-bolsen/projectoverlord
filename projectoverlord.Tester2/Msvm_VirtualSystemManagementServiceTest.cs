@@ -30,7 +30,7 @@ namespace projectoverlord.Tester2
 
             Msvm_VirtualSystemManagementService VSMService = new Msvm_VirtualSystemManagementService(Environment.MachineName);
             VSMService.ExportSystemDefinition(RootVMName, dir);
-            VSMService.ImportSystemDefinition("Copy", dir);
+            VSMService.ImportSystemDefinition("Copy", dir.GetDirectories(RootVMName).Single());
         }
     }
 }
