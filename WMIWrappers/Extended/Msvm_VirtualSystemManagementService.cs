@@ -106,7 +106,7 @@ namespace WMIWrappers.Extended
 
             ImportSystemResult res = new ImportSystemResult(Instance.InvokeMethod("ImportSystemDefinition", inParams, null));
             Msvm_PlannedComputerSystem vm = res.GetResultingVM();
-
+            vm.Caption = VMName;
             ManagementBaseObject relParams = Instance.GetMethodParameters("RealizePlannedSystem");
             relParams["PlannedSystem"] = vm.Path;
             WMIMethodInvokeResult res2 = new WMIMethodInvokeResult(Instance.InvokeMethod("RealizePlannedSystem", relParams, null));
