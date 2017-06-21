@@ -13,5 +13,20 @@ namespace WMIWrappers.Extended
         {
 
         }
+
+        public Msvm_VirtualSystemSettingData GetMsvm_VirtualSystemSettingData()
+        {
+            ManagementObjectCollection related = Instance.GetRelated(
+                "Msvm_VirtualSystemSettingData",
+                "Msvm_SettingsDefineState",
+                null,
+                null,
+                "SettingData",
+                "ManagedElement",
+                false,
+                null);
+
+            return new Msvm_VirtualSystemSettingData(related.OfType<ManagementObject>().Single());
+        }
     }
 }

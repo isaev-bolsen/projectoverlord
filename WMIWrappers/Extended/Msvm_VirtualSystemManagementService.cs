@@ -107,6 +107,8 @@ namespace WMIWrappers.Extended
             ImportSystemResult res = new ImportSystemResult(Instance.InvokeMethod("ImportSystemDefinition", inParams, null));
             Msvm_PlannedComputerSystem vm = res.GetResultingVM();
             vm.Caption = VMName;
+            Msvm_VirtualSystemSettingData settings = vm.GetMsvm_VirtualSystemSettingData();
+
             //https://blogs.msdn.microsoft.com/taylorb/2014/03/12/importing-vms-utilizing-the-hyper-v-wmi-v2-namespace/
             //Get related settings and change them..
 
